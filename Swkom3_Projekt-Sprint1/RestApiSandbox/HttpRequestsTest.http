@@ -1,0 +1,39 @@
+##### used for testing REST requests
+
+### get all documents
+GET http://localhost:8082/Paperless/main
+
+### get document with ID 1
+GET http://localhost:8082/Paperless/main/2
+
+### create new document
+POST http://localhost:8082/Paperless/main
+Content-Type: application/json
+
+{
+  "ID": 2,
+  "title": "Hello",
+  "description": "World",
+  "type": "Paper",
+  "contentCreated": "2023-09-15T12:15:23.3163063",
+  "contentUpdated": null,
+  "url": "www.xyz"
+}
+
+### update existing document
+PUT http://localhost:8082/Paperless/main/2
+Content-Type: application/json
+
+{
+  "ID": 2,
+  "title": "Hello",
+  "description": "Something",
+  "type": "Paper",
+  "contentCreated": "2023-09-15T12:15:23.3163063",
+  "contentUpdated": null,
+  "url": "www.xyz"
+}
+
+### delete existing document
+DELETE http://localhost:8082/Paperless/main/2
+Content-Type: application/json
