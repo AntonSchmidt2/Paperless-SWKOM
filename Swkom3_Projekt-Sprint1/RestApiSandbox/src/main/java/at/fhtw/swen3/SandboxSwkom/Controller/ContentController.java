@@ -14,7 +14,7 @@ import java.util.Optional;
 
 // Controller for document management, communicates with ContentCollectionRepo for CRUD stuff
 @RestController
-@RequestMapping("Paperless/main")
+@RequestMapping("Paperless/main") // sets default url for all mapping functionality
 @CrossOrigin
 public class ContentController {
     private final ContentCollectionRepo collectionRepo;

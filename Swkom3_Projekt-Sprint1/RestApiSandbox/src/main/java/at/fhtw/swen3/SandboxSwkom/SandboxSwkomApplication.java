@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+// start the project and go to url http://localhost:8082/Paperless/main to see all document entries
+
 @SpringBootApplication
 public class SandboxSwkomApplication {
 
