@@ -8,8 +8,8 @@
       "sizes": "256x256"
     },
     {
-      "src": "assets/logo-notext.svg",
-      "sizes": "any"
+      //"src": "assets/logo-notext.svg",
+      //"sizes": "any"
     }
   ],
   "name": "Paperless-ngx",

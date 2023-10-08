@@ -22096,7 +22096,7 @@ globalThis.$localize = Object.assign(globalThis.$localize || {}, { locale: "en-U
 
       class SavedViewService extends _abstract_paperless_service__WEBPACK_IMPORTED_MODULE_0__.AbstractPaperlessService {
         constructor(http) {
-          super(http, 'saved_views');
+          super(http, '/saved_views');
           this.savedViews = [];
           this.reload();
         }
@@ -22297,7 +22297,7 @@ globalThis.$localize = Object.assign(globalThis.$localize || {}, { locale: "en-U
           this.http = http;
           this.toastService = toastService;
           this.savedViewService = savedViewService;
-          this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.apiBaseUrl + 'ui_settings/';
+          this.baseUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_1__.environment.apiBaseUrl + '/ui_settings';
           this.settings = {};
           this.settingsSaved = new _angular_core__WEBPACK_IMPORTED_MODULE_5__.EventEmitter();
           this.renderer = rendererFactory.createRenderer(null, null);
@@ -23237,14 +23237,14 @@ globalThis.$localize = Object.assign(globalThis.$localize || {}, { locale: "en-U
       // `ng build --configuration production` replaces `environment.ts` with `environment.prod.ts`.
       // The list of file replacements can be found in `angular.json`.
       const environment = {
-        production: false,
-        apiBaseUrl: 'localhost:8080',
-        apiVersion: '2',
-        appTitle: 'Paperless-ngx',
-        version: 'DEVELOPMENT',
-        webSocketHost: 'localhost:8000',
-        webSocketProtocol: 'ws:',
-        webSocketBaseUrl: '/ws/'
+          production: false,
+          apiBaseUrl: 'http://localhost:8080',
+          apiVersion: '2',
+          appTitle: 'Paperless-ngx',
+          version: 'DEVELOPMENT',
+          webSocketHost: 'localhost:8080',
+          webSocketProtocol: 'ws:',
+          webSocketBaseUrl: '/ws/'
       };
       /*
        * For easier debugging in development mode, you can import the following file
