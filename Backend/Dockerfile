@@ -1,3 +1,8 @@
+# it may be neccessary to shut down the initial container before executing the commands
+# because it leads to port conflict and the app may not start properly
+# docker build -t paperless .
+# docker run -d -p 8080:8080 paperless
+
 # Build stage
 ## builds the whole project and generates openapi-spring-1.0.jar file
 FROM maven:latest AS build
