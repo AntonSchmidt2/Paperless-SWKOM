@@ -2,7 +2,6 @@ package org.openapitools.model;
 
 import java.net.URI;
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Arrays;
@@ -25,11 +24,6 @@ import javax.annotation.Generated;
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-09-20T14:37:30.836739600+02:00[Europe/Vienna]")
 public class DocumentType {
 
-  private static final String DB_ID = "id";
-  private static final String DB_SLUG = "slug";
-
-
-  @JsonIgnore
   private Long id;
 
   private JsonNullable<String> slug = JsonNullable.undefined();

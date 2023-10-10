@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
+    // Redirects to the Swagger UI when the root of the application is requested.
     @RequestMapping("/")
     public String index() {
         return "redirect:swagger-ui.html";

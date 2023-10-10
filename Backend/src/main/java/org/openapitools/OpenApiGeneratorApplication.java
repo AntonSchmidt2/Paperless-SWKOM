@@ -8,12 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.FullyQualifiedAnnotationBeanNameGenerator;
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 
 @SpringBootApplication(
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
 )
+//
 @ComponentScan(
     basePackages = {"org.openapitools", "org.openapitools.api" , "org.openapitools.configuration"},
     nameGenerator = FullyQualifiedAnnotationBeanNameGenerator.class
@@ -25,6 +24,7 @@ public class OpenApiGeneratorApplication {
     }
 
     @Bean(name = "org.openapitools.OpenApiGeneratorApplication.jsonNullableModule")
+    // Module handles json objects containing nullable values
     public Module jsonNullableModule() {
         return new JsonNullableModule();
     }
