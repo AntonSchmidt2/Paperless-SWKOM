@@ -23242,7 +23242,7 @@ globalThis.$localize = Object.assign(globalThis.$localize || {}, { locale: "en-U
           apiVersion: '2',
           appTitle: 'Paperless-ngx',
           version: 'DEVELOPMENT',
-          webSocketHost: 'localhost:8080',
+          webSocketHost: 'localhost:8000',
           webSocketProtocol: 'ws:',
           webSocketBaseUrl: '/ws/'
       };
