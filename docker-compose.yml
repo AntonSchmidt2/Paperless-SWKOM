@@ -3,7 +3,7 @@ services:
   frontend:
     image: paperless:nginx
     build:
-      dockerfile: ui/Dockerfile
+      dockerfile: Frontend/Dockerfile
     ports:
       - "8080:80"
   backend:
