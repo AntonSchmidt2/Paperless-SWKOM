@@ -4,7 +4,7 @@ Problems with content_type_id column in line 571,578
 I just removed content_type_id but am not sure if it is vital for the integrity of the DB
 ------------------
 Also the role 'paperless' needs to be created before import
-as all the tables are set to be owned by this role 
+as all the tables are set to be owned by this role
 */
 
 create table auth_group
