@@ -570,16 +570,16 @@ create table auth_permission
         primary key,
     name            varchar(255) not null,
     content_type    varchar(100) not null,
-    codename        varchar(100) not null,
-    constraint auth_permission_content_type_id_codename_01ab375a_uniq
-        unique (content_type_id, codename)
+    codename        varchar(100) not null
+    -- constraint auth_permission_content_type_id_codename_01ab375a_uniq
+    --     unique (content_type_id, codename)
 );
 
 alter table auth_permission
     owner to paperless;
 
-create index auth_permission_content_type_id_2f476e4b
-    on auth_permission (content_type_id);
+-- create index auth_permission_content_type_id_2f476e4b
+--     on auth_permission (content_type_id);
 
 
 create table auth_group_permissions
