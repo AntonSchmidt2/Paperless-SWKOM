@@ -5,62 +5,59 @@
  */
 package org.openapitools.api;
 
-import org.openapitools.model.AckTasks200Response;
-import org.openapitools.model.AckTasksRequest;
-import org.openapitools.model.BulkEditRequest;
-import org.openapitools.model.CreateCorrespondentRequest;
-import org.openapitools.model.CreateDocumentType200Response;
-import org.openapitools.model.CreateGroupRequest;
-import org.openapitools.model.CreateSavedViewsRequest;
-import org.openapitools.model.CreateStoragePath200Response;
-import org.openapitools.model.CreateStoragePathRequest;
-import org.openapitools.model.CreateTag200Response;
-import org.openapitools.model.CreateTagRequest;
-import org.openapitools.model.CreateUISettings200Response;
-import org.openapitools.model.CreateUISettingsRequest;
-import org.openapitools.model.CreateUserRequest;
+import org.openapitools.serviceLayer.model.AckTasks200Response;
+import org.openapitools.serviceLayer.model.AckTasksRequest;
+import org.openapitools.serviceLayer.model.BulkEditRequest;
+import org.openapitools.serviceLayer.model.CreateCorrespondentRequest;
+import org.openapitools.serviceLayer.model.CreateDocumentType200Response;
+import org.openapitools.serviceLayer.model.CreateGroupRequest;
+import org.openapitools.serviceLayer.model.CreateSavedViewsRequest;
+import org.openapitools.serviceLayer.model.CreateStoragePath200Response;
+import org.openapitools.serviceLayer.model.CreateStoragePathRequest;
+import org.openapitools.serviceLayer.model.CreateTag200Response;
+import org.openapitools.serviceLayer.model.CreateTagRequest;
+import org.openapitools.serviceLayer.model.CreateUISettings200Response;
+import org.openapitools.serviceLayer.model.CreateUISettingsRequest;
+import org.openapitools.serviceLayer.model.CreateUserRequest;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.openapitools.model.GetCorrespondents200Response;
-import org.openapitools.model.GetDocument200Response;
-import org.openapitools.model.GetDocumentMetadata200Response;
-import org.openapitools.model.GetDocumentSuggestions200Response;
-import org.openapitools.model.GetDocumentTypes200Response;
-import org.openapitools.model.GetDocuments200Response;
-import org.openapitools.model.GetGroups200Response;
-import org.openapitools.model.GetSavedViews200Response;
-import org.openapitools.model.GetStoragePaths200Response;
-import org.openapitools.model.GetTags200Response;
-import org.openapitools.model.GetTasks200ResponseInner;
-import org.openapitools.model.GetUISettings200Response;
-import org.openapitools.model.GetUsers200Response;
-import org.openapitools.model.GetUsers200ResponseResultsInner;
+import org.openapitools.serviceLayer.model.GetCorrespondents200Response;
+import org.openapitools.serviceLayer.model.GetDocument200Response;
+import org.openapitools.serviceLayer.model.GetDocumentMetadata200Response;
+import org.openapitools.serviceLayer.model.GetDocumentSuggestions200Response;
+import org.openapitools.serviceLayer.model.GetDocumentTypes200Response;
+import org.openapitools.serviceLayer.model.GetDocuments200Response;
+import org.openapitools.serviceLayer.model.GetGroups200Response;
+import org.openapitools.serviceLayer.model.GetSavedViews200Response;
+import org.openapitools.serviceLayer.model.GetStoragePaths200Response;
+import org.openapitools.serviceLayer.model.GetTags200Response;
+import org.openapitools.serviceLayer.model.GetTasks200ResponseInner;
+import org.openapitools.serviceLayer.model.GetUISettings200Response;
+import org.openapitools.serviceLayer.model.GetUsers200Response;
+import org.openapitools.serviceLayer.model.GetUsers200ResponseResultsInner;
 import java.time.OffsetDateTime;
-import org.openapitools.model.SelectionData200Response;
-import org.openapitools.model.SelectionDataRequest;
-import org.openapitools.model.Statistics200Response;
-import org.openapitools.model.UpdateCorrespondent200Response;
-import org.openapitools.model.UpdateCorrespondentRequest;
-import org.openapitools.model.UpdateDocument200Response;
-import org.openapitools.model.UpdateDocumentRequest;
-import org.openapitools.model.UpdateDocumentType200Response;
-import org.openapitools.model.UpdateDocumentTypeRequest;
-import org.openapitools.model.UpdateGroup200Response;
-import org.openapitools.model.UpdateGroupRequest;
-import org.openapitools.model.UpdateStoragePath200Response;
-import org.openapitools.model.UpdateStoragePathRequest;
-import org.openapitools.model.UpdateTag200Response;
-import org.openapitools.model.UpdateTagRequest;
-import org.openapitools.model.UpdateUserRequest;
-import org.openapitools.model.UserInfo;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import org.openapitools.serviceLayer.model.SelectionData200Response;
+import org.openapitools.serviceLayer.model.SelectionDataRequest;
+import org.openapitools.serviceLayer.model.Statistics200Response;
+import org.openapitools.serviceLayer.model.UpdateCorrespondent200Response;
+import org.openapitools.serviceLayer.model.UpdateCorrespondentRequest;
+import org.openapitools.serviceLayer.model.UpdateDocument200Response;
+import org.openapitools.serviceLayer.model.UpdateDocumentRequest;
+import org.openapitools.serviceLayer.model.UpdateDocumentType200Response;
+import org.openapitools.serviceLayer.model.UpdateDocumentTypeRequest;
+import org.openapitools.serviceLayer.model.UpdateGroup200Response;
+import org.openapitools.serviceLayer.model.UpdateGroupRequest;
+import org.openapitools.serviceLayer.model.UpdateStoragePath200Response;
+import org.openapitools.serviceLayer.model.UpdateStoragePathRequest;
+import org.openapitools.serviceLayer.model.UpdateTag200Response;
+import org.openapitools.serviceLayer.model.UpdateTagRequest;
+import org.openapitools.serviceLayer.model.UpdateUserRequest;
+import org.openapitools.serviceLayer.model.UserInfo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import org.springframework.http.HttpStatus;
@@ -72,9 +69,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
@@ -417,7 +412,6 @@ public interface ApiApi {
             }
         });
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
 
@@ -1756,7 +1750,7 @@ public interface ApiApi {
      * @param documentType  (optional)
      * @param tags  (optional)
      * @param correspondent  (optional)
-     * @param document  (optional)
+     * //@param document  (optional)
      * @return Success (status code 200)
      */
     @Operation(
@@ -1780,7 +1774,6 @@ public interface ApiApi {
         @Parameter(name = "document", description = "") @RequestPart(value = "document", required = false) List<MultipartFile> document
     ) {
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
 }
