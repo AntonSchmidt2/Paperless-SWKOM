@@ -1,21 +1,26 @@
-package org.openapitools.serviceLayer.model;
+package org.openapitools.serviceLayer.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.openapitools.jackson.nullable.JsonNullable;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.Valid;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import javax.annotation.Generated;
 
 /**
- * DocumentType
+ * Correspondent
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
-public class DocumentType {
+public class CorrespondentDTO {
 
   private Long id;
 
@@ -31,7 +36,10 @@ public class DocumentType {
 
   private Long documentCount;
 
-  public DocumentType id(Long id) {
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+  private OffsetDateTime lastCorrespondence;
+
+  public CorrespondentDTO id(Long id) {
     this.id = id;
     return this;
   }
@@ -51,7 +59,7 @@ public class DocumentType {
     this.id = id;
   }
 
-  public DocumentType slug(String slug) {
+  public CorrespondentDTO slug(String slug) {
     this.slug = JsonNullable.of(slug);
     return this;
   }
@@ -71,7 +79,7 @@ public class DocumentType {
     this.slug = slug;
   }
 
-  public DocumentType name(String name) {
+  public CorrespondentDTO name(String name) {
     this.name = JsonNullable.of(name);
     return this;
   }
@@ -91,7 +99,7 @@ public class DocumentType {
     this.name = name;
   }
 
-  public DocumentType match(String match) {
+  public CorrespondentDTO match(String match) {
     this.match = JsonNullable.of(match);
     return this;
   }
@@ -111,7 +119,7 @@ public class DocumentType {
     this.match = match;
   }
 
-  public DocumentType matchingAlgorithm(Long matchingAlgorithm) {
+  public CorrespondentDTO matchingAlgorithm(Long matchingAlgorithm) {
     this.matchingAlgorithm = matchingAlgorithm;
     return this;
   }
@@ -131,7 +139,7 @@ public class DocumentType {
     this.matchingAlgorithm = matchingAlgorithm;
   }
 
-  public DocumentType isInsensitive(Boolean isInsensitive) {
+  public CorrespondentDTO isInsensitive(Boolean isInsensitive) {
     this.isInsensitive = isInsensitive;
     return this;
   }
@@ -151,7 +159,7 @@ public class DocumentType {
     this.isInsensitive = isInsensitive;
   }
 
-  public DocumentType documentCount(Long documentCount) {
+  public CorrespondentDTO documentCount(Long documentCount) {
     this.documentCount = documentCount;
     return this;
   }
@@ -171,6 +179,26 @@ public class DocumentType {
     this.documentCount = documentCount;
   }
 
+  public CorrespondentDTO lastCorrespondence(OffsetDateTime lastCorrespondence) {
+    this.lastCorrespondence = lastCorrespondence;
+    return this;
+  }
+
+  /**
+   * Get lastCorrespondence
+   * @return lastCorrespondence
+  */
+  @Valid 
+  @Schema(name = "last_correspondence", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
+  @JsonProperty("last_correspondence")
+  public OffsetDateTime getLastCorrespondence() {
+    return lastCorrespondence;
+  }
+
+  public void setLastCorrespondence(OffsetDateTime lastCorrespondence) {
+    this.lastCorrespondence = lastCorrespondence;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -179,14 +207,15 @@ public class DocumentType {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DocumentType documentType = (DocumentType) o;
-    return Objects.equals(this.id, documentType.id) &&
-        equalsNullable(this.slug, documentType.slug) &&
-        equalsNullable(this.name, documentType.name) &&
-        equalsNullable(this.match, documentType.match) &&
-        Objects.equals(this.matchingAlgorithm, documentType.matchingAlgorithm) &&
-        Objects.equals(this.isInsensitive, documentType.isInsensitive) &&
-        Objects.equals(this.documentCount, documentType.documentCount);
+    CorrespondentDTO correspondent = (CorrespondentDTO) o;
+    return Objects.equals(this.id, correspondent.id) &&
+        equalsNullable(this.slug, correspondent.slug) &&
+        equalsNullable(this.name, correspondent.name) &&
+        equalsNullable(this.match, correspondent.match) &&
+        Objects.equals(this.matchingAlgorithm, correspondent.matchingAlgorithm) &&
+        Objects.equals(this.isInsensitive, correspondent.isInsensitive) &&
+        Objects.equals(this.documentCount, correspondent.documentCount) &&
+        Objects.equals(this.lastCorrespondence, correspondent.lastCorrespondence);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -195,7 +224,7 @@ public class DocumentType {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, hashCodeNullable(slug), hashCodeNullable(name), hashCodeNullable(match), matchingAlgorithm, isInsensitive, documentCount);
+    return Objects.hash(id, hashCodeNullable(slug), hashCodeNullable(name), hashCodeNullable(match), matchingAlgorithm, isInsensitive, documentCount, lastCorrespondence);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -208,7 +237,7 @@ public class DocumentType {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DocumentType {\n");
+    sb.append("class Correspondent {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    slug: ").append(toIndentedString(slug)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
@@ -216,6 +245,7 @@ public class DocumentType {
     sb.append("    matchingAlgorithm: ").append(toIndentedString(matchingAlgorithm)).append("\n");
     sb.append("    isInsensitive: ").append(toIndentedString(isInsensitive)).append("\n");
     sb.append("    documentCount: ").append(toIndentedString(documentCount)).append("\n");
+    sb.append("    lastCorrespondence: ").append(toIndentedString(lastCorrespondence)).append("\n");
     sb.append("}");
     return sb.toString();
   }
