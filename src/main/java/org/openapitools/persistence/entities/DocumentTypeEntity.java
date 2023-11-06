@@ -23,8 +23,8 @@ public class DocumentTypeEntity {
     @OneToMany(mappedBy = "documentType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentEntity> documentTypeDocumentEntities;
 
-    //@OneToMany(mappedBy = "assignDocumentType")
-    //private Set<PaperlessMailMailrule> assignDocumentTypePaperlessMailMailrules;
+    //@OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private Set<PaperlessMailMailrule> assignDocumentTypePaperlessMailMailruleEntities;
 
     public Integer getId() {
         return id;

@@ -44,7 +44,7 @@ public class TagEntity {
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentTagsEntity> documentTagsEntities;
 
-    //@OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
     //private Set<PaperlessMailMailruleAssignTags> tagPaperlessMailMailruleAssignTagsEntities;
 
     public Integer getId() {

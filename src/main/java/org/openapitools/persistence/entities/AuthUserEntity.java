@@ -17,4 +17,14 @@ public class AuthUserEntity {
             generator = "id_sequence"
     )
     private Integer id;
+
+    @Column(nullable = false, length = 150)
+    private String name;
+
+    //@OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private Set<AuthUserGroups> groupAuthUserGroupses;
+
+    //@OneToMany(mappedBy = "group", cascade = CascadeType.ALL, orphanRemoval = true)
+    //private Set<AuthGroupPermissions> groupAuthGroupPermissionses;
+
 }

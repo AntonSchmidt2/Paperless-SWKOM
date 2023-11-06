@@ -36,11 +36,11 @@ public class CorrespondentEntity {
     @JoinColumn(name = "owner_id")
     private AuthUserEntity owner;
 
-    @OneToMany(mappedBy = "tags", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "correspondent", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentEntity> correspondentDocumentEntities;
 
 
-    //@OneToMany(mappedBy = "tags", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
     //private Set<PaperlessMailMailrule> assignCorrespondentPaperlessMailMailrules;
 
     public Integer getId() {
