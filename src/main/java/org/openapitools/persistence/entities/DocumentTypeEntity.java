@@ -23,8 +23,9 @@ public class DocumentTypeEntity {
     @OneToMany(mappedBy = "documentType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentEntity> documentTypeDocumentEntities;
 
-    //@OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private Set<PaperlessMailMailrule> assignDocumentTypePaperlessMailMailruleEntities;
+    //update mappedBy when MailruleEntity finished
+    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PaperlessMailMailruleEntity> assignDocumentTypePaperlessMailMailruleEntities;
 
     public Integer getId() {
         return id;
@@ -40,5 +41,13 @@ public class DocumentTypeEntity {
 
     public void setDocumentTypeDocumentEntities(Set<DocumentEntity> documentTypeDocumentEntities) {
         this.documentTypeDocumentEntities = documentTypeDocumentEntities;
+    }
+
+    public Set<PaperlessMailMailruleEntity> getAssignDocumentTypePaperlessMailMailruleEntities() {
+        return assignDocumentTypePaperlessMailMailruleEntities;
+    }
+
+    public void setAssignDocumentTypePaperlessMailMailruleEntities(Set<PaperlessMailMailruleEntity> assignDocumentTypePaperlessMailMailruleEntities) {
+        this.assignDocumentTypePaperlessMailMailruleEntities = assignDocumentTypePaperlessMailMailruleEntities;
     }
 }

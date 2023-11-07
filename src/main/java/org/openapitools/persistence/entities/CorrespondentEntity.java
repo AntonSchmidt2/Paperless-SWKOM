@@ -1,7 +1,6 @@
 package org.openapitools.persistence.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,8 +39,9 @@ public class CorrespondentEntity {
     private Set<DocumentEntity> correspondentDocumentEntities;
 
 
-    //@OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private Set<PaperlessMailMailrule> assignCorrespondentPaperlessMailMailrules;
+    //update mappedBy parameter when Mailrule Entity finished
+    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PaperlessMailMailruleEntity> assignCorrespondentPaperlessMailMailrules;
 
     public Integer getId() {
         return id;
@@ -97,5 +97,13 @@ public class CorrespondentEntity {
 
     public void setCorrespondentDocumentEntities(Set<DocumentEntity> correspondentDocumentEntities) {
         this.correspondentDocumentEntities = correspondentDocumentEntities;
+    }
+
+    public Set<PaperlessMailMailruleEntity> getAssignCorrespondentPaperlessMailMailrules() {
+        return assignCorrespondentPaperlessMailMailrules;
+    }
+
+    public void setAssignCorrespondentPaperlessMailMailrules(Set<PaperlessMailMailruleEntity> assignCorrespondentPaperlessMailMailrules) {
+        this.assignCorrespondentPaperlessMailMailrules = assignCorrespondentPaperlessMailMailrules;
     }
 }
