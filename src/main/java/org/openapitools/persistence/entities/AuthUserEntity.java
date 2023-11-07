@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Getter
 @Setter
 @Table(name = "auth_user")
 public class AuthUserEntity {
@@ -22,4 +21,10 @@ public class AuthUserEntity {
             generator = "id_sequence"
     )
     private Integer id;
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

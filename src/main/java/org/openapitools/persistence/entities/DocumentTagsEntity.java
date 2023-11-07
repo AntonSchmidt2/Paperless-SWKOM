@@ -18,13 +18,13 @@ public class DocumentTagsEntity {
     )
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // Verhindert vollständiges Laden der relevanten Dokumente bevor sie nicht explizit abgefragt werden
     @JoinColumn(name = "document_id", nullable = false)
     private DocumentEntity document;
 
     @ManyToOne
     @JoinColumn(name = "tag_id", nullable = false)
-    private TagEntity tag;
+    private DocumentsTagEntity tag;
 
     public Integer getId() {
         return id;
@@ -42,11 +42,11 @@ public class DocumentTagsEntity {
         this.document = document;
     }
 
-    public TagEntity getTag() {
+    public DocumentsTagEntity getTag() {
         return tag;
     }
 
-    public void setTag(TagEntity tag) {
+    public void setTag(DocumentsTagEntity tag) {
         this.tag = tag;
     }
 }

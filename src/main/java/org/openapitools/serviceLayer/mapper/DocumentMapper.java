@@ -3,8 +3,7 @@ package org.openapitools.serviceLayer.mapper;
 import org.mapstruct.*;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.openapitools.persistence.entities.*;
-import org.openapitools.persistence.repository.CorrespondentRepository;
-import org.openapitools.persistence.repository.DocumentRepository;
+import org.openapitools.persistence.repository.*;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +11,7 @@ import org.w3c.dom.DocumentType;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,29 +25,26 @@ public abstract class DocumentMapper implements Mapper<DocumentEntity, DocumentD
     private DocumentRepository documentRepository;
     @Autowired
     private CorrespondentRepository correspondentRepository;
+    @Autowired
+    private DocumentTypeRepository documentTypeRepository;
+    @Autowired
+    private StoragePathRepository storagePathRepository;
+    @Autowired
+    private AuthUserRepository authUserRepository;
+    @Autowired
+    private DocumentTagsRepository documentTagsRepository;
 
-
-    //@Mapping(target = "id", ignore = true)
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentDto")
     @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeDto")
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathDto")
-    //@Mapping(target = "title", source = "title", qualifiedByName = "titleEntityToTitle")
-    //@Mapping(target = "content", source = "content", qualifiedByName = "contentEntityToContent")
-    @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsDto")
-    //@Mapping(target = "modified", source = "modified", qualifiedByName = "modifiedEntityToModified")
-    //@Mapping(target = "created", source = "created", qualifiedByName = "createdEntityToCreated")
     @Mapping(target = "archiveSerialNumber", source = "archiveSerialNumber", qualifiedByName = "archiveSerialNumberDto")
-    abstract public DocumentEntity dtoToEntity(DocumentDTO dto);
+    @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsDto")
+    abstract public DocumentEntity dtoToEntity(DocumentDTO dto); // Abstract weil mapstruct alles generiert
 
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentEntity")
     @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeEntity")
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathEntity")
-    //@Mapping(target = "title", source = "title", qualifiedByName = "titleEntityToTitle")
-    //@Mapping(target = "content", source = "content", qualifiedByName = "contentEntityToContent")
     @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsEntity")
-    //@Mapping(target = "modified", source = "modified", qualifiedByName = "modifiedEntityToModified")
-    //@Mapping(target = "created", source = "created", qualifiedByName = "createdEntityToCreated")
-    @Mapping(target = "archiveSerialNumber", source = "archiveSerialNumber", qualifiedByName = "archiveSerialNumberEntity")
     abstract public DocumentDTO entityToDTO(DocumentEntity entity);
 
     @Named("correspondentEntity")
@@ -64,9 +61,9 @@ public abstract class DocumentMapper implements Mapper<DocumentEntity, DocumentD
         return storagePath!=null ? JsonNullable.of(storagePath.getId()) : JsonNullable.undefined();
     }
 
-    @Named("ownerEntity")
-    JsonNullable<Integer> map(AuthUserEntity owner) {
-        return owner!=null ? JsonNullable.of(owner.getId()) : JsonNullable.undefined();
+    @Named("authUserEntity")
+    JsonNullable<Integer> map(AuthUserEntity authUser) {
+        return authUser!=null ? JsonNullable.of(authUser.getId()) : JsonNullable.undefined();
     }
 
     @Named("tagsEntity")
@@ -88,33 +85,34 @@ public abstract class DocumentMapper implements Mapper<DocumentEntity, DocumentD
     }
 
     @Named("documentTypeDto")
-    DocumentType mapDocumentType(JsonNullable<Integer> value) {
+    DocumentTypeEntity mapDocumentType(JsonNullable<Integer> value) {
         if(value==null || !value.isPresent() || value.get()==null) return null;
 
         return documentTypeRepository.findById(value.get()).orElse(null);
     }
 
     @Named("storagePathDto")
-    StoragePath mapStoragePath(JsonNullable<Integer> value) {
+    StoragePathEntity mapStoragePath(JsonNullable<Integer> value) {
         if(value==null || !value.isPresent() || value.get()==null) return null;
 
         return storagePathRepository.findById(value.get()).orElse(null);
     }
 
     @Named("ownerDto")
-    AuthUser mapOwner(JsonNullable<Integer> value) {
+    AuthUserEntity mapOwner(JsonNullable<Integer> value) {
         if(value==null || !value.isPresent() || value.get()==null) return null;
 
-        return userRepository.findById(value.get()).orElse(null);
+        return authUserRepository.findById(value.get()).orElse(null);
     }
 
     @Named("tagsDto")
-    Set<DocumentTags> mapDocTag(JsonNullable<List<Integer>> value) {
+    Set<DocumentTagsEntity> mapDocTag(JsonNullable<List<Integer>> value) {
         if(value==null || !value.isPresent() || value.get()==null) return null;
 
-        return new HashSet<DocumentTags>(documentTagsRepository.findAllById(value.get()));
+        return new HashSet<DocumentTagsEntity>(documentTagsRepository.findAllById(value.get()));
     }
 
+    // only exists in the entity, is generated here
     @Named("archiveSerialNumberDto")
     Integer mapArchiveSerialNumber(JsonNullable<String> value) {
         if(value==null || !value.isPresent() || value.get()==null) return null;

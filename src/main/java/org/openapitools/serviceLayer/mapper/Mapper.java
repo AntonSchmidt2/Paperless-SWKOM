@@ -20,12 +20,4 @@ public interface Mapper<ENTITY, DTO>{
         return JsonNullable.of(value);
     }
 
-    default OffsetDateTime mapOffsetDateTime(String value){
-        return OffsetDateTime.parse(value);
-    }
-
-    default String mapOffsetDateTime(OffsetDateTime value){
-        return value.toString();
-    }
-
 }
