@@ -1,8 +1,13 @@
 package org.openapitools.persistence.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "auth_user")
 public class AuthUserEntity {
     @Id
