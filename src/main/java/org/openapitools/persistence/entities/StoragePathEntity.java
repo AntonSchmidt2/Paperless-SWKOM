@@ -72,4 +72,28 @@ public class StoragePathEntity {
     public void setMatchingAlgorithm(Integer matchingAlgorithm) {
         this.matchingAlgorithm = matchingAlgorithm;
     }
+
+    public Boolean getInsensitive() {
+        return isInsensitive;
+    }
+
+    public void setInsensitive(Boolean insensitive) {
+        isInsensitive = insensitive;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public Set<DocumentEntity> getStoragePathEntities() {
+        return storagePathEntities;
+    }
+
+    public void setStoragePathEntities(Set<DocumentEntity> storagePathEntities) {
+        this.storagePathEntities = storagePathEntities;
+    }
 }

@@ -38,9 +38,8 @@ public class CorrespondentEntity {
     @OneToMany(mappedBy = "correspondent", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentEntity> correspondentDocumentEntities;
 
-
     //update mappedBy parameter when Mailrule Entity finished
-    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assignCorrespondent", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PaperlessMailMailruleEntity> assignCorrespondentPaperlessMailMailrules;
 
     public Integer getId() {

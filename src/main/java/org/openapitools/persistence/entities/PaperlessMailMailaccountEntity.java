@@ -47,7 +47,7 @@ public class PaperlessMailMailaccountEntity {
     @Column(name = "is_token", nullable = false)
     private Boolean isToken;
 
-    @OneToMany(mappedBy = "mailaccount", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private Set<PaperlessMailMailruleEntity> mailRules;
 
     public Integer getId() {

@@ -19,12 +19,10 @@ public class DocumentTypeEntity {
     )
     private Integer id;
 
-
     @OneToMany(mappedBy = "documentType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentEntity> documentTypeDocumentEntities;
 
-    //update mappedBy when MailruleEntity finished
-    @OneToMany(mappedBy = "", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assignDocumentType", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PaperlessMailMailruleEntity> assignDocumentTypePaperlessMailMailruleEntities;
 
     public Integer getId() {
