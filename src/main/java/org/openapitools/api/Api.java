@@ -6,8 +6,8 @@
 package org.openapitools.api;
 
 import org.openapitools.serviceLayer.dto.responseOK.AckTasks200Response;
-import org.openapitools.serviceLayer.dto.createRequest.AckTasksRequest;
-import org.openapitools.serviceLayer.dto.createRequest.BulkEditRequest;
+import org.openapitools.serviceLayer.dto.AckTasksRequest;
+import org.openapitools.serviceLayer.dto.BulkEditRequest;
 import org.openapitools.serviceLayer.dto.createRequest.CreateCorrespondentRequest;
 import org.openapitools.serviceLayer.dto.responseOK.CreateDocumentType200Response;
 import org.openapitools.serviceLayer.dto.createRequest.CreateGroupRequest;
@@ -1765,7 +1765,7 @@ public interface Api {
         value = "/api/documents/post_document/",
         consumes = { "multipart/form-data" }
     )
-    default ResponseEntity<Void> uploadDocument(
+    default ResponseEntity<String> uploadDocument(
         @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
         @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
         @Parameter(name = "document_type", description = "") @Valid @RequestParam(value = "document_type", required = false) Integer documentType,

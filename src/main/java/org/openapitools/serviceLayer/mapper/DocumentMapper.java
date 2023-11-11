@@ -6,8 +6,8 @@ import org.openapitools.persistence.entities.*;
 import org.openapitools.persistence.repository.*;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.DocumentType;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -17,9 +17,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @org.mapstruct.Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE,
-    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-@Service
+        unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Component
 public abstract class DocumentMapper implements Mapper<DocumentEntity, DocumentDTO>{
     @Autowired
     private DocumentRepository documentRepository;

@@ -1,4 +1,4 @@
-package org.openapitools.persistence.repository;
+package org.openapitools.persistence.repositories;
 
 import org.openapitools.persistence.entities.PaperlessMailMailruleAssignTags;
 import org.springframework.data.jpa.repository.JpaRepository;

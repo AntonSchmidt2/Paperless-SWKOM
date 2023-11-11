@@ -1,5 +1,8 @@
 package org.openapitools.serviceLayer.mapper;
 
+import org.mapstruct.MappingConstants;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import java.time.OffsetDateTime;

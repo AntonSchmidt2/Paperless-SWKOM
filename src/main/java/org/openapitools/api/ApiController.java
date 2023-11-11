@@ -23,12 +23,13 @@ import org.openapitools.jackson.nullable.JsonNullable;
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 @CrossOrigin(origins = "http://localhost:8080")
 public class ApiController implements Api {
-
     private final NativeWebRequest request;
+    private final DocumentServiceImpl documentService;
 
     @Autowired
-    public ApiController(NativeWebRequest request) {
+    public ApiController(NativeWebRequest request, DocumentServiceImpl documentService) {
         this.request = request;
+        this.documentService = documentService;
     }
 
     @Override
@@ -36,4 +37,27 @@ public class ApiController implements Api {
         return Optional.ofNullable(request);
     }
 
+    @Override
+    public ResponseEntity<String> uploadDocument(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
+        try {
+
+            String name = document.get(0).getOriginalFilename();
+            DocumentDTO documentDTO = new DocumentDTO();
+            documentDTO.setTitle(JsonNullable.of(title == null ? name : title));
+            documentDTO.setOriginalFileName(JsonNullable.of(name));
+            documentDTO.setCreated(created);
+            documentDTO.setDocumentType(JsonNullable.of(documentType));
+            documentDTO.setTags(JsonNullable.of(tags));
+            documentDTO.setCorrespondent(JsonNullable.of(correspondent));
+
+
+            documentService.uploadDocument(documentDTO);
+            return ResponseEntity.ok().body("Document upload finished");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+
+    }
 }
