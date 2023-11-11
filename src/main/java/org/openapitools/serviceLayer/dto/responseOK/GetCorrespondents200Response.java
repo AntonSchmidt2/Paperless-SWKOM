@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -17,7 +18,7 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("GetCorrespondents_200_response")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
 public class GetCorrespondents200Response {
 
   private Integer count;

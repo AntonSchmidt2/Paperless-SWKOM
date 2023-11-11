@@ -1,4 +1,4 @@
-package org.openapitools.serviceLayer.dto.responseOK;
+package org.openapitools.serviceLayer.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,8 +15,8 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("GetDocuments_200_response_results_inner_notes_inner")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
-public class GetDocuments200ResponseResultsInnerNotesInner {
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
+public class DocumentNoteDTO {
 
   private Integer id;
 
@@ -28,14 +28,14 @@ public class GetDocuments200ResponseResultsInnerNotesInner {
 
   private Integer user;
 
-  public GetDocuments200ResponseResultsInnerNotesInner() {
+  public DocumentNoteDTO() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public GetDocuments200ResponseResultsInnerNotesInner(Integer id, String note, String created, Integer document, Integer user) {
+  public DocumentNoteDTO(Integer id, String note, String created, Integer document, Integer user) {
     this.id = id;
     this.note = note;
     this.created = created;
@@ -43,7 +43,7 @@ public class GetDocuments200ResponseResultsInnerNotesInner {
     this.user = user;
   }
 
-  public GetDocuments200ResponseResultsInnerNotesInner id(Integer id) {
+  public DocumentNoteDTO id(Integer id) {
     this.id = id;
     return this;
   }
@@ -63,7 +63,7 @@ public class GetDocuments200ResponseResultsInnerNotesInner {
     this.id = id;
   }
 
-  public GetDocuments200ResponseResultsInnerNotesInner note(String note) {
+  public DocumentNoteDTO note(String note) {
     this.note = note;
     return this;
   }
@@ -83,7 +83,7 @@ public class GetDocuments200ResponseResultsInnerNotesInner {
     this.note = note;
   }
 
-  public GetDocuments200ResponseResultsInnerNotesInner created(String created) {
+  public DocumentNoteDTO created(String created) {
     this.created = created;
     return this;
   }
@@ -103,7 +103,7 @@ public class GetDocuments200ResponseResultsInnerNotesInner {
     this.created = created;
   }
 
-  public GetDocuments200ResponseResultsInnerNotesInner document(Integer document) {
+  public DocumentNoteDTO document(Integer document) {
     this.document = document;
     return this;
   }
@@ -123,7 +123,7 @@ public class GetDocuments200ResponseResultsInnerNotesInner {
     this.document = document;
   }
 
-  public GetDocuments200ResponseResultsInnerNotesInner user(Integer user) {
+  public DocumentNoteDTO user(Integer user) {
     this.user = user;
     return this;
   }
@@ -151,12 +151,12 @@ public class GetDocuments200ResponseResultsInnerNotesInner {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetDocuments200ResponseResultsInnerNotesInner getDocuments200ResponseResultsInnerNotesInner = (GetDocuments200ResponseResultsInnerNotesInner) o;
-    return Objects.equals(this.id, getDocuments200ResponseResultsInnerNotesInner.id) &&
-        Objects.equals(this.note, getDocuments200ResponseResultsInnerNotesInner.note) &&
-        Objects.equals(this.created, getDocuments200ResponseResultsInnerNotesInner.created) &&
-        Objects.equals(this.document, getDocuments200ResponseResultsInnerNotesInner.document) &&
-        Objects.equals(this.user, getDocuments200ResponseResultsInnerNotesInner.user);
+    DocumentNoteDTO documentNoteDTO = (DocumentNoteDTO) o;
+    return Objects.equals(this.id, documentNoteDTO.id) &&
+        Objects.equals(this.note, documentNoteDTO.note) &&
+        Objects.equals(this.created, documentNoteDTO.created) &&
+        Objects.equals(this.document, documentNoteDTO.document) &&
+        Objects.equals(this.user, documentNoteDTO.user);
   }
 
   @Override

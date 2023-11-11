@@ -1,4 +1,4 @@
-package org.openapitools.serviceLayer.dto.responseOK;
+package org.openapitools.serviceLayer.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -16,26 +17,26 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("GetDocument_200_response_permissions")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
-public class GetDocument200ResponsePermissions {
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
+public class Permissions {
 
-  private GetDocument200ResponsePermissionsView view;
+  private PermissionsView view;
 
-  private GetDocument200ResponsePermissionsView change;
+  private PermissionsView change;
 
-  public GetDocument200ResponsePermissions() {
+  public Permissions() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public GetDocument200ResponsePermissions(GetDocument200ResponsePermissionsView view, GetDocument200ResponsePermissionsView change) {
+  public Permissions(PermissionsView view, PermissionsView change) {
     this.view = view;
     this.change = change;
   }
 
-  public GetDocument200ResponsePermissions view(GetDocument200ResponsePermissionsView view) {
+  public Permissions view(PermissionsView view) {
     this.view = view;
     return this;
   }
@@ -47,15 +48,15 @@ public class GetDocument200ResponsePermissions {
   @NotNull @Valid 
   @Schema(name = "view", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("view")
-  public GetDocument200ResponsePermissionsView getView() {
+  public PermissionsView getView() {
     return view;
   }
 
-  public void setView(GetDocument200ResponsePermissionsView view) {
+  public void setView(PermissionsView view) {
     this.view = view;
   }
 
-  public GetDocument200ResponsePermissions change(GetDocument200ResponsePermissionsView change) {
+  public Permissions change(PermissionsView change) {
     this.change = change;
     return this;
   }
@@ -67,11 +68,11 @@ public class GetDocument200ResponsePermissions {
   @NotNull @Valid 
   @Schema(name = "change", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("change")
-  public GetDocument200ResponsePermissionsView getChange() {
+  public PermissionsView getChange() {
     return change;
   }
 
-  public void setChange(GetDocument200ResponsePermissionsView change) {
+  public void setChange(PermissionsView change) {
     this.change = change;
   }
 
@@ -83,9 +84,9 @@ public class GetDocument200ResponsePermissions {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetDocument200ResponsePermissions getDocument200ResponsePermissions = (GetDocument200ResponsePermissions) o;
-    return Objects.equals(this.view, getDocument200ResponsePermissions.view) &&
-        Objects.equals(this.change, getDocument200ResponsePermissions.change);
+    Permissions permissions = (Permissions) o;
+    return Objects.equals(this.view, permissions.view) &&
+        Objects.equals(this.change, permissions.change);
   }
 
   @Override

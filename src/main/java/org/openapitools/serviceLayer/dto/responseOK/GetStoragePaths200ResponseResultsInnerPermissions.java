@@ -16,7 +16,7 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("GetStoragePaths_200_response_results_inner_permissions")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
 public class GetStoragePaths200ResponseResultsInnerPermissions {
 
   private GetStoragePaths200ResponseResultsInnerPermissionsView view;

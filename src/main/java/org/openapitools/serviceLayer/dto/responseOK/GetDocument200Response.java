@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+
+import com.paperless.services.dto.DocumentNoteDTO;
+import com.paperless.services.dto.Permissions;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
@@ -17,7 +20,7 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("GetDocument_200_response")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
 public class GetDocument200Response {
 
   private Integer id;
@@ -51,10 +54,10 @@ public class GetDocument200Response {
 
   private Integer owner;
 
-  private GetDocument200ResponsePermissions permissions;
+  private Permissions permissions;
 
   @Valid
-  private List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes = new ArrayList<>();
+  private List<@Valid DocumentNoteDTO> notes = new ArrayList<>();
 
   public GetDocument200Response() {
     super();
@@ -63,7 +66,7 @@ public class GetDocument200Response {
   /**
    * Constructor with only required parameters
    */
-  public GetDocument200Response(Integer id, Integer correspondent, Integer documentType, Integer storagePath, String title, String content, List<Integer> tags, String created, String createdDate, String modified, String added, Integer archiveSerialNumber, String originalFileName, String archivedFileName, Integer owner, GetDocument200ResponsePermissions permissions, List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes) {
+  public GetDocument200Response(Integer id, Integer correspondent, Integer documentType, Integer storagePath, String title, String content, List<Integer> tags, String created, String createdDate, String modified, String added, Integer archiveSerialNumber, String originalFileName, String archivedFileName, Integer owner, Permissions permissions, List<@Valid DocumentNoteDTO> notes) {
     this.id = id;
     this.correspondent = correspondent;
     this.documentType = documentType;
@@ -391,7 +394,7 @@ public class GetDocument200Response {
     this.owner = owner;
   }
 
-  public GetDocument200Response permissions(GetDocument200ResponsePermissions permissions) {
+  public GetDocument200Response permissions(Permissions permissions) {
     this.permissions = permissions;
     return this;
   }
@@ -403,20 +406,20 @@ public class GetDocument200Response {
   @NotNull @Valid 
   @Schema(name = "permissions", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("permissions")
-  public GetDocument200ResponsePermissions getPermissions() {
+  public Permissions getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(GetDocument200ResponsePermissions permissions) {
+  public void setPermissions(Permissions permissions) {
     this.permissions = permissions;
   }
 
-  public GetDocument200Response notes(List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes) {
+  public GetDocument200Response notes(List<@Valid DocumentNoteDTO> notes) {
     this.notes = notes;
     return this;
   }
 
-  public GetDocument200Response addNotesItem(GetDocuments200ResponseResultsInnerNotesInner notesItem) {
+  public GetDocument200Response addNotesItem(DocumentNoteDTO notesItem) {
     if (this.notes == null) {
       this.notes = new ArrayList<>();
     }
@@ -431,11 +434,11 @@ public class GetDocument200Response {
   @NotNull @Valid 
   @Schema(name = "notes", requiredMode = Schema.RequiredMode.REQUIRED)
   @JsonProperty("notes")
-  public List<@Valid GetDocuments200ResponseResultsInnerNotesInner> getNotes() {
+  public List<@Valid DocumentNoteDTO> getNotes() {
     return notes;
   }
 
-  public void setNotes(List<@Valid GetDocuments200ResponseResultsInnerNotesInner> notes) {
+  public void setNotes(List<@Valid DocumentNoteDTO> notes) {
     this.notes = notes;
   }
 

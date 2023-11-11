@@ -1,4 +1,4 @@
-package org.openapitools.serviceLayer.dto.responseOK;
+package org.openapitools.serviceLayer.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,8 +17,8 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("GetDocument_200_response_permissions_view")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
-public class GetDocument200ResponsePermissionsView {
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
+public class PermissionsView {
 
   @Valid
   private List<Integer> users = new ArrayList<>();
@@ -26,24 +26,24 @@ public class GetDocument200ResponsePermissionsView {
   @Valid
   private List<Integer> groups = new ArrayList<>();
 
-  public GetDocument200ResponsePermissionsView() {
+  public PermissionsView() {
     super();
   }
 
   /**
    * Constructor with only required parameters
    */
-  public GetDocument200ResponsePermissionsView(List<Integer> users, List<Integer> groups) {
+  public PermissionsView(List<Integer> users, List<Integer> groups) {
     this.users = users;
     this.groups = groups;
   }
 
-  public GetDocument200ResponsePermissionsView users(List<Integer> users) {
+  public PermissionsView users(List<Integer> users) {
     this.users = users;
     return this;
   }
 
-  public GetDocument200ResponsePermissionsView addUsersItem(Integer usersItem) {
+  public PermissionsView addUsersItem(Integer usersItem) {
     if (this.users == null) {
       this.users = new ArrayList<>();
     }
@@ -66,12 +66,12 @@ public class GetDocument200ResponsePermissionsView {
     this.users = users;
   }
 
-  public GetDocument200ResponsePermissionsView groups(List<Integer> groups) {
+  public PermissionsView groups(List<Integer> groups) {
     this.groups = groups;
     return this;
   }
 
-  public GetDocument200ResponsePermissionsView addGroupsItem(Integer groupsItem) {
+  public PermissionsView addGroupsItem(Integer groupsItem) {
     if (this.groups == null) {
       this.groups = new ArrayList<>();
     }
@@ -102,9 +102,9 @@ public class GetDocument200ResponsePermissionsView {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    GetDocument200ResponsePermissionsView getDocument200ResponsePermissionsView = (GetDocument200ResponsePermissionsView) o;
-    return Objects.equals(this.users, getDocument200ResponsePermissionsView.users) &&
-        Objects.equals(this.groups, getDocument200ResponsePermissionsView.groups);
+    PermissionsView permissionsView = (PermissionsView) o;
+    return Objects.equals(this.users, permissionsView.users) &&
+        Objects.equals(this.groups, permissionsView.groups);
   }
 
   @Override

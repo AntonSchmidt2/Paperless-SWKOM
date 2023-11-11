@@ -1,4 +1,4 @@
-package org.openapitools.serviceLayer.dto.createRequest;
+package org.openapitools.serviceLayer.dto;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,7 +17,7 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("AckTasks_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
 public class AckTasksRequest {
 
   @Valid

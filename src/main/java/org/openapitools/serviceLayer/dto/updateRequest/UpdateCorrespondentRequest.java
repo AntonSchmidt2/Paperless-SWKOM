@@ -6,8 +6,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+
+import com.paperless.services.dto.okresponse.GetCorrespondents200ResponseResultsInnerPermissions;
 import io.swagger.v3.oas.annotations.media.Schema;
-import org.openapitools.serviceLayer.dto.responseOK.GetCorrespondents200ResponseResultsInnerPermissions;
 
 
 import javax.annotation.Generated;
@@ -17,7 +18,7 @@ import javax.annotation.Generated;
  */
 
 @JsonTypeName("UpdateCorrespondent_request")
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
+@Generated(value = "com.paperless.codegen.languages.SpringCodegen", date = "2023-10-22T12:32:07.613318Z[Etc/UTC]")
 public class UpdateCorrespondentRequest {
 
   private Integer id;
@@ -261,7 +262,6 @@ public class UpdateCorrespondentRequest {
   public GetCorrespondents200ResponseResultsInnerPermissions getPermissions() {
     return permissions;
   }
-
 
   public UpdateCorrespondentRequest setPermissions(GetCorrespondents200ResponseResultsInnerPermissions setPermissions) {
     this.setPermissions = setPermissions;
