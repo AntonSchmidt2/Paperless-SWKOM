@@ -111,32 +111,6 @@ public class DocumentMapper implements GenericMapper<DocumentDTO, DocumentEntity
         return dto;
     }
 
-
-    @Named("correspondentEntity")
-    JsonNullable<Integer> map(CorrespondentEntity correspondent) {
-        return correspondent != null ? JsonNullable.of(correspondent.getId()) : JsonNullable.undefined();
-    }
-
-    @Named("documentTypeEntity")
-    JsonNullable<Integer> map(DocumentTypeEntity documentType) {
-        return documentType != null ? JsonNullable.of(documentType.getId()) : JsonNullable.undefined();
-    }
-
-    @Named("storagePathEntity")
-    JsonNullable<Integer> map(StoragePathEntity storagePath) {
-        return storagePath != null ? JsonNullable.of(storagePath.getId()) : JsonNullable.undefined();
-    }
-
-    @Named("ownerEntity")
-    JsonNullable<Integer> map(AuthUserEntity owner) {
-        return owner != null ? JsonNullable.of(owner.getId()) : JsonNullable.undefined();
-    }
-
-    @Named("tagsEntity")
-    JsonNullable<List<Integer>> map(Set<DocumentTagsEntity> tags) {
-        return tags != null ? JsonNullable.of(tags.stream().map(tag -> (int) tag.getId()).toList()) : JsonNullable.undefined();
-    }
-
     // map created to createdDate (Date without the time)
     @Named("createdToCreatedDate")
     OffsetDateTime mapCreatedDate(OffsetDateTime value) {
