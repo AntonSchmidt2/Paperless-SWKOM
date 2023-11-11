@@ -1,12 +1,11 @@
 package org.openapitools.persistence.entities;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "documents_correspondent")
-public class CorrespondentEntity {
+@Table(name = "documents_tag")
+public class TagEntity {
     @Id
     @Column(nullable = false, updatable = false)
     @SequenceGenerator(
@@ -32,16 +31,21 @@ public class CorrespondentEntity {
     @Column(name = "is_insensitive", nullable = false)
     private Boolean isInsensitive;
 
+    @Column(name = "is_inbox_tag", nullable = false)
+    private Boolean isInboxTag;
+
+    @Column(name = "color", length = 7, nullable = false)
+    private String color;
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private AuthUserEntity owner;
 
-    @OneToMany(mappedBy = "tags", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DocumentEntity> correspondentDocumentEntities;
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<DocumentTagsEntity> documentTagsEntities;
 
-
-    @OneToMany(mappedBy = "tags", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<PaperlessMailMailrule> assignCorrespondentPaperlessMailMailrules;
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PaperlessMailMailruleAssignTags> tagPaperlessMailMailruleAssignTagsEntities;
 
     public Integer getId() {
         return id;
@@ -83,6 +87,22 @@ public class CorrespondentEntity {
         isInsensitive = insensitive;
     }
 
+    public Boolean getInboxTag() {
+        return isInboxTag;
+    }
+
+    public void setInboxTag(Boolean inboxTag) {
+        isInboxTag = inboxTag;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
     public AuthUserEntity getOwner() {
         return owner;
     }
@@ -91,11 +111,19 @@ public class CorrespondentEntity {
         this.owner = owner;
     }
 
-    public Set<DocumentEntity> getCorrespondentDocumentEntities() {
-        return correspondentDocumentEntities;
+    public Set<DocumentTagsEntity> getDocumentTagsEntities() {
+        return documentTagsEntities;
     }
 
-    public void setCorrespondentDocumentEntities(Set<DocumentEntity> correspondentDocumentEntities) {
-        this.correspondentDocumentEntities = correspondentDocumentEntities;
+    public void setDocumentTagsEntities(Set<DocumentTagsEntity> documentTagsEntities) {
+        this.documentTagsEntities = documentTagsEntities;
+    }
+
+    public Set<PaperlessMailMailruleAssignTags> getTagPaperlessMailMailruleAssignTagsEntities() {
+        return tagPaperlessMailMailruleAssignTagsEntities;
+    }
+
+    public void setTagPaperlessMailMailruleAssignTagsEntities(Set<PaperlessMailMailruleAssignTags> tagPaperlessMailMailruleAssignTagsEntities) {
+        this.tagPaperlessMailMailruleAssignTagsEntities = tagPaperlessMailMailruleAssignTagsEntities;
     }
 }
