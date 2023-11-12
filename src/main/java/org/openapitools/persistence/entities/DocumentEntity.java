@@ -1,10 +1,15 @@
 package org.openapitools.persistence.entities;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.OffsetDateTime;
 import java.util.Set;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "documents_document")
 public class DocumentEntity {
     @Id
@@ -77,9 +82,6 @@ public class DocumentEntity {
 
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentNoteEntity> documentNoteEntities;
-
-    @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<DocumentTagsEntity> documentTagsEntities;
 
     public Integer getId() {
         return id;
@@ -233,11 +235,11 @@ public class DocumentEntity {
         this.documentNoteEntities = documentNoteEntities;
     }
 
-    public Set<DocumentTagsEntity> getDocumentTagsEntities() {
-        return documentTagsEntities;
-    }
+    // https://stackoverflow.com/questions/56559136/mapstruct-problem-unknown-property-error-but-property-is-present
+    @OneToMany(mappedBy = "document")
+    private Set<DocumentTagsEntity> tags;
 
-    public void setDocumentTagsEntities(Set<DocumentTagsEntity> documentTagsEntities) {
-        this.documentTagsEntities = documentTagsEntities;
+    public void setTags(Set<DocumentTagsEntity> tags) {
+        this.tags = tags;
     }
 }

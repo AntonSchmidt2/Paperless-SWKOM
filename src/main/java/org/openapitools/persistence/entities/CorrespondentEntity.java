@@ -40,8 +40,8 @@ public class CorrespondentEntity {
     private Set<DocumentEntity> correspondentDocumentEntities;
 
 
-    //@OneToMany(mappedBy = "tags", cascade = CascadeType.ALL, orphanRemoval = true)
-    //private Set<PaperlessMailMailrule> assignCorrespondentPaperlessMailMailrules;
+    @OneToMany(mappedBy = "tags", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<PaperlessMailMailrule> assignCorrespondentPaperlessMailMailrules;
 
     public Integer getId() {
         return id;
