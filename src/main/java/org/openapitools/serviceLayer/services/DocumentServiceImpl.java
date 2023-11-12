@@ -5,10 +5,8 @@ import org.openapitools.persistence.repositories.DocumentRepository;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.openapitools.serviceLayer.mapper.DocumentMapper;
 //import org.openapitools.serviceLayer.mapper.GetDocument200ResponseMapper;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 public class DocumentServiceImpl {
     private final DocumentRepository documentRepository;

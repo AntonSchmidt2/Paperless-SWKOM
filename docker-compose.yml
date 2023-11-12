@@ -1,4 +1,4 @@
-version: "1.0"
+version: "3"
 services:
   frontend:
     image: paperless:nginx
@@ -12,4 +12,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8088:8088"
+  rabbitmq:
+    image: "rabbitmq:3.8"
+    hostname: "rabbitmq"
+    ports:
+      - "5672:5672"  # RabbitMQ default port
+      - "15672:15672"  # RabbitMQ Management Plugin port
+    environment:
+      RABBITMQ_ERLANG_COOKIE: 61de55712c51b72384b7b6a3d8e81e875de757b705f513f5a39ddf9ca97b6516
 
