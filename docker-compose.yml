@@ -1,9 +1,13 @@
+## as of now there are issues with composing the backend and frontend applications
+## without the existing image parameter
+## This is probably the cause of some functionality issues in the Paperless UI
+
 version: "3"
 services:
   frontend:
     image: paperless:nginx
     build:
-      dockerfile: Frontend/Dockerfile
+      dockerfile: Frontend/Dockerfile_Frontend
     ports:
       - "8080:80"
   backend:
@@ -12,12 +16,37 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8088:8088"
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB="Paperless"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
   rabbitmq:
     image: "rabbitmq:3.8"
     hostname: "rabbitmq"
     ports:
-      - "5672:5672"  # RabbitMQ default port
+      - "5672:5672"  # RabbitMQ port
       - "15672:15672"  # RabbitMQ Management Plugin port
     environment:
-      RABBITMQ_ERLANG_COOKIE: 61de55712c51b72384b7b6a3d8e81e875de757b705f513f5a39ddf9ca97b6516
-
+      - RABBITMQ_DEFAULT_USER=paperless
+      - RABBITMQ_DEFAULT_PASS=paperless
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000" # MinIO port
+      - "9001:9001" # MinIO console port
+    environment:
+      - MINIO_ACCESS_KEY=paperless
+      - MINIO_SECRET_KEY=paperless
+      - MINIO_CONSOLE_ADDRESS=:9001
+    command: server /data

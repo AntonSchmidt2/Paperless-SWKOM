@@ -4,7 +4,6 @@ import org.openapitools.persistence.entities.DocumentEntity;
 import org.openapitools.persistence.repositories.DocumentRepository;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.openapitools.serviceLayer.mapper.DocumentMapper;
-//import org.openapitools.serviceLayer.mapper.GetDocument200ResponseMapper;
 
 import java.time.OffsetDateTime;
 
@@ -13,10 +12,12 @@ public class DocumentServiceImpl {
     //NOTE for some reason Autowired didnt recognize the Mapper as a Component
     // this is a quick fix, might be better to get it to work later
     private final DocumentMapper documentMapper;
+    private final RabbitMQSender rabbitMQSender;
 
-    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper) {
+    public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, RabbitMQSender rabbitMQSender) {
         this.documentRepository = documentRepository;
         this.documentMapper = documentMapper;
+        this.rabbitMQSender = rabbitMQSender;
     }
 
 
