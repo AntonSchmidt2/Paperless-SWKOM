@@ -19,13 +19,14 @@ import java.util.Optional;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
-@Controller
+@Controller // This tells Spring that this class is a Controller
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "http://localhost:8080") // Allow requests from localhost:8080
 public class ApiController implements Api {
     private final NativeWebRequest request;
     private final DocumentServiceImpl documentService;
 
+    // Autowired constructor based dependency injection
     @Autowired
     public ApiController(NativeWebRequest request, DocumentServiceImpl documentService) {
         this.request = request;
@@ -37,6 +38,7 @@ public class ApiController implements Api {
         return Optional.ofNullable(request);
     }
 
+    //take received document & metadata and send to service layer (documentService)
     @Override
     public ResponseEntity<String> uploadDocument(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
         try {
@@ -50,7 +52,7 @@ public class ApiController implements Api {
             documentDTO.setTags(JsonNullable.of(tags));
             documentDTO.setCorrespondent(JsonNullable.of(correspondent));
 
-
+            // call injected service layer method
             documentService.uploadDocument(documentDTO);
             return ResponseEntity.ok().body("Document upload finished");
 

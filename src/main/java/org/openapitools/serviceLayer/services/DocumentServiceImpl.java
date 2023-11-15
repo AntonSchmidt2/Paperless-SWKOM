@@ -7,6 +7,7 @@ import org.openapitools.serviceLayer.mapper.DocumentMapper;
 
 import java.time.OffsetDateTime;
 
+
 public class DocumentServiceImpl {
     private final DocumentRepository documentRepository;
     //NOTE for some reason Autowired didnt recognize the Mapper as a Component
@@ -14,13 +15,14 @@ public class DocumentServiceImpl {
     private final DocumentMapper documentMapper;
     private final RabbitMQSender rabbitMQSender;
 
+    // Constructor based dependency injection
     public DocumentServiceImpl(DocumentRepository documentRepository, DocumentMapper documentMapper, RabbitMQSender rabbitMQSender) {
         this.documentRepository = documentRepository;
         this.documentMapper = documentMapper;
         this.rabbitMQSender = rabbitMQSender;
     }
 
-
+    // Method to upload a document setting dummy values for the fields that are not yet implemented
     public void uploadDocument(DocumentDTO documentDTO) {
         documentDTO.setCreated(OffsetDateTime.now());
         documentDTO.setAdded(OffsetDateTime.now());
@@ -28,8 +30,10 @@ public class DocumentServiceImpl {
         documentDTO.content("");
         documentDTO.setAdded(OffsetDateTime.now());
 
+        // Convert the DTO to an entity
         DocumentEntity documentToBeSaved = documentMapper.dtoToEntity(documentDTO);
 
+        // Set dummy values for the fields that are not yet implemented
         documentToBeSaved.setChecksum("checksum");
         documentToBeSaved.setStorageType("pdf");
         documentToBeSaved.setMimeType("pdf");
