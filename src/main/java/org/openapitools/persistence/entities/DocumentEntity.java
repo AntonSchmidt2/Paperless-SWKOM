@@ -83,6 +83,10 @@ public class DocumentEntity {
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentNoteEntity> documentNoteEntities;
 
+    // https://stackoverflow.com/questions/56559136/mapstruct-problem-unknown-property-error-but-property-is-present
+    @OneToMany(mappedBy = "document")
+    private Set<DocumentTagsEntity> tags;
+
     public Integer getId() {
         return id;
     }
@@ -235,9 +239,9 @@ public class DocumentEntity {
         this.documentNoteEntities = documentNoteEntities;
     }
 
-    // https://stackoverflow.com/questions/56559136/mapstruct-problem-unknown-property-error-but-property-is-present
-    @OneToMany(mappedBy = "document")
-    private Set<DocumentTagsEntity> tags;
+    public Set<DocumentTagsEntity> getTags() {
+        return tags;
+    }
 
     public void setTags(Set<DocumentTagsEntity> tags) {
         this.tags = tags;

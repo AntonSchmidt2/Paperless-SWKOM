@@ -3,11 +3,10 @@ package org.openapitools.serviceLayer.mapper;
 import org.mapstruct.*;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.openapitools.persistence.entities.*;
-import org.openapitools.persistence.repository.*;
+import org.openapitools.persistence.repositories.*;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;

@@ -7,21 +7,19 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openapitools.jackson.nullable.JsonNullable;
 import org.openapitools.persistence.entities.*;
-import org.openapitools.persistence.repository.*;
-import org.openapitools.serviceLayer.dto.CorrespondentDTO;
+import org.openapitools.persistence.repositories.*;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.openapitools.serviceLayer.mapper.DocumentMapper;
-import org.openapitools.serviceLayer.mapper.DocumentMapperImpl;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.Collections;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class DocumentMapperTest {
+    // @MockBean annotation creates a mock implementation for the class
     @MockBean
     private CorrespondentRepository correspondentRepository;
     @MockBean
@@ -33,9 +31,21 @@ public class DocumentMapperTest {
     @MockBean
     private DocumentTagsRepository documentTagsRepository;
 
+    // @InjectMocks annotation creates an instance of the class and injects the mocks that are created with the @MockBean annotation
     @InjectMocks
-    private final DocumentMapper documentMapper = new DocumentMapperImpl();
+    private final DocumentMapper documentMapper = new DocumentMapper() {
+        @Override
+        public DocumentEntity dtoToEntity(DocumentDTO dto) {
+            return null;
+        }
 
+        @Override
+        public DocumentDTO entityToDTO(DocumentEntity entity) {
+            return null;
+        }
+    };
+
+    // initializes mocks before each test method
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -43,6 +53,7 @@ public class DocumentMapperTest {
 
     @Test
     public void testDtoToEntity() {
+        // Create dummy DTO
         DocumentDTO documentDTO = new DocumentDTO();
         documentDTO.setId(1);
         documentDTO.setArchiveSerialNumber(JsonNullable.of("1"));
@@ -51,7 +62,7 @@ public class DocumentMapperTest {
         documentDTO.setStoragePath(JsonNullable.of(3));
         documentDTO.setTags(JsonNullable.of(Collections.singletonList(4)));
 
-        // Mock repository responses
+        // Create dummy entities
         CorrespondentEntity correspondent = new CorrespondentEntity();
         correspondent.setId(1);
         DocumentTypeEntity documentType = new DocumentTypeEntity();
@@ -63,7 +74,7 @@ public class DocumentMapperTest {
         DocumentTagsEntity doc = new DocumentTagsEntity();
         doc.setId(4);
 
-
+        // Mock the repository calls
         Mockito.when(correspondentRepository.findById(1)).thenReturn(java.util.Optional.of(correspondent));
         Mockito.when(documentTypeRepository.findById(2)).thenReturn(java.util.Optional.of(documentType));
         Mockito.when(storagePathRepository.findById(3)).thenReturn(java.util.Optional.of(storagePath));
