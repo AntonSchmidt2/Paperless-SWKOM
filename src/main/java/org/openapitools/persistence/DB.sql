@@ -16,7 +16,7 @@ create table auth_group
 );
 
 alter table auth_group
-    owner to paperless;
+    owner to postgres;
 
 create index auth_group_name_a6ea08ec_like
     on auth_group (name varchar_pattern_ops);
@@ -41,7 +41,7 @@ create table auth_user
 );
 
 alter table auth_user
-    owner to paperless;
+    owner to postgres;
 
 create index auth_user_username_6821ab7c_like
     on auth_user (username varchar_pattern_ops);
@@ -65,7 +65,7 @@ create table auth_user_groups
 );
 
 alter table auth_user_groups
-    owner to paperless;
+    owner to postgres;
 
 create index auth_user_groups_user_id_6a12ed8b
     on auth_user_groups (user_id);
@@ -87,7 +87,7 @@ create table documents_log
 );
 
 alter table documents_log
-    owner to paperless;
+    owner to postgres;
 
 
 
@@ -111,7 +111,7 @@ create table documents_correspondent
 );
 
 alter table documents_correspondent
-    owner to paperless;
+    owner to postgres;
 
 create index documents_sender_name_18997c37_like
     on documents_correspondent (name varchar_pattern_ops);
@@ -144,7 +144,7 @@ create table documents_documenttype
 );
 
 alter table documents_documenttype
-    owner to paperless;
+    owner to postgres;
 
 create index documents_documenttype_owner_id_a19f201d
     on documents_documenttype (owner_id);
@@ -175,7 +175,7 @@ create table documents_storagepath
 );
 
 alter table documents_storagepath
-    owner to paperless;
+    owner to postgres;
 
 create index documents_storagepath_owner_id_c8f01fe8
     on documents_storagepath (owner_id);
@@ -207,7 +207,7 @@ create table documents_tag
 );
 
 alter table documents_tag
-    owner to paperless;
+    owner to postgres;
 
 create index documents_tag_owner_id_f0875d77
     on documents_tag (owner_id);
@@ -230,7 +230,7 @@ create table documents_uisettings
 );
 
 alter table documents_uisettings
-    owner to paperless;
+    owner to postgres;
 
 
 
@@ -252,7 +252,7 @@ create table documents_paperlesstask
 );
 
 alter table documents_paperlesstask
-    owner to paperless;
+    owner to postgres;
 
 create index documents_paperlesstask_task_id_24b393f9_like
     on documents_paperlesstask (task_id varchar_pattern_ops);
@@ -275,7 +275,7 @@ create table documents_savedview
 );
 
 alter table documents_savedview
-    owner to paperless;
+    owner to postgres;
 
 create index documents_savedview_user_id_48baf272
     on documents_savedview (owner_id);
@@ -297,7 +297,7 @@ create table documents_savedviewfilterrule
 );
 
 alter table documents_savedviewfilterrule
-    owner to paperless;
+    owner to postgres;
 
 create index documents_savedviewfilterrule_saved_view_id_038e2c89
     on documents_savedviewfilterrule (saved_view_id);
@@ -306,7 +306,7 @@ create index documents_savedviewfilterrule_saved_view_id_038e2c89
 
 create sequence documents_sender_id_seq;
 
-alter sequence documents_sender_id_seq owner to paperless;
+alter sequence documents_sender_id_seq owner to postgres;
 
 alter sequence documents_sender_id_seq owned by documents_correspondent.id;
 
@@ -333,7 +333,7 @@ create table paperless_mail_mailaccount
 );
 
 alter table paperless_mail_mailaccount
-    owner to paperless;
+    owner to postgres;
 
 create index paperless_mail_mailaccount_name_6af0ff82_like
     on paperless_mail_mailaccount (name varchar_pattern_ops);
@@ -387,7 +387,7 @@ create table documents_document
 );
 
 alter table documents_document
-    owner to paperless;
+    owner to postgres;
 
 create index documents_document_title_6b08e02a
     on documents_document (title);
@@ -445,7 +445,7 @@ create table documents_note
 );
 
 alter table documents_note
-    owner to paperless;
+    owner to postgres;
 
 create index documents_comment_created_dd512b3b
     on documents_note (created);
@@ -510,7 +510,7 @@ create table paperless_mail_mailrule
 );
 
 alter table paperless_mail_mailrule
-    owner to paperless;
+    owner to postgres;
 
 create index paperless_mail_mailrule_account_id_461903f4
     on paperless_mail_mailrule (account_id);
@@ -531,7 +531,7 @@ create index paperless_mail_mailrule_owner_id_05d1c50f
 
 create sequence documents_comment_id_seq;
 
-alter sequence documents_comment_id_seq owner to paperless;
+alter sequence documents_comment_id_seq owner to postgres;
 
 alter sequence documents_comment_id_seq owned by documents_note.id;
 
@@ -554,7 +554,7 @@ create table documents_document_tags
 );
 
 alter table documents_document_tags
-    owner to paperless;
+    owner to postgres;
 
 create index documents_document_tags_document_id_006f35a8
     on documents_document_tags (document_id);
@@ -576,7 +576,7 @@ create table auth_permission
 );
 
 alter table auth_permission
-    owner to paperless;
+    owner to postgres;
 
 -- create index auth_permission_content_type_id_2f476e4b
 --     on auth_permission (content_type_id);
@@ -599,7 +599,7 @@ create table auth_group_permissions
 );
 
 alter table auth_group_permissions
-    owner to paperless;
+    owner to postgres;
 
 create index auth_group_permissions_group_id_b120cbf9
     on auth_group_permissions (group_id);
@@ -625,7 +625,7 @@ create table auth_user_user_permissions
 );
 
 alter table auth_user_user_permissions
-    owner to paperless;
+    owner to postgres;
 
 create index auth_user_user_permissions_user_id_a95ead1b
     on auth_user_user_permissions (user_id);
@@ -647,7 +647,7 @@ create table authtoken_token
 );
 
 alter table authtoken_token
-    owner to paperless;
+    owner to postgres;
 
 create index authtoken_token_key_10f0b77e_like
     on authtoken_token (key varchar_pattern_ops);
@@ -675,7 +675,7 @@ create table paperless_mail_processedmail
 );
 
 alter table paperless_mail_processedmail
-    owner to paperless;
+    owner to postgres;
 
 create index paperless_mail_processedmail_owner_id_63d8ece4
     on paperless_mail_processedmail (owner_id);
@@ -702,7 +702,7 @@ create table paperless_mail_mailrule_assign_tags
 );
 
 alter table paperless_mail_mailrule_assign_tags
-    owner to paperless;
+    owner to postgres;
 
 create index paperless_mail_mailrule_assign_tags_mailrule_id_80d0b16c
     on paperless_mail_mailrule_assign_tags (mailrule_id);
