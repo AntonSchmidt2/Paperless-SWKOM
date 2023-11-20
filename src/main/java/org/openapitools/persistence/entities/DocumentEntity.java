@@ -8,8 +8,6 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "documents_document")
 public class DocumentEntity {
     @Id

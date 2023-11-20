@@ -80,10 +80,10 @@ public class PaperlessMailMailrule {
     @JoinColumn(name = "owner_id", nullable = false)
     private AuthUserEntity owner;
 
-    @OneToMany(mappedBy = "mailRule")
+    @OneToMany(mappedBy = "rule")
     private Set<PaperlessMailProcessedmail> processedMails;
-
-    @OneToMany(mappedBy = "mailRule")
+    paperless_mail_mailrule
+    @OneToMany(mappedBy = "mailrule")
     private Set<PaperlessMailMailruleAssignTags> assignTags;
 
     public Integer getId() {
