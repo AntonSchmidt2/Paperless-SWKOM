@@ -82,7 +82,6 @@ public class PaperlessMailMailrule {
 
     @OneToMany(mappedBy = "rule")
     private Set<PaperlessMailProcessedmail> processedMails;
-    paperless_mail_mailrule
     @OneToMany(mappedBy = "mailrule")
     private Set<PaperlessMailMailruleAssignTags> assignTags;
 
