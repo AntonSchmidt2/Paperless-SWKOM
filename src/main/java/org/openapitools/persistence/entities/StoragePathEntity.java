@@ -72,4 +72,12 @@ public class StoragePathEntity {
     public void setMatchingAlgorithm(Integer matchingAlgorithm) {
         this.matchingAlgorithm = matchingAlgorithm;
     }
+
+    public Set<DocumentEntity> getStoragePathEntities() {
+        return storagePathEntities;
+    }
+
+    public void setStoragePathEntities(Set<DocumentEntity> storagePathEntities) {
+        this.storagePathEntities = storagePathEntities;
+    }
 }
