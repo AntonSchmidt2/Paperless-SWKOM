@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
-import com.paperless.services.dto.okresponse.GetStoragePaths200ResponseResultsInnerPermissions;
+import org.openapitools.serviceLayer.dto.responseOK.GetStoragePaths200ResponseResultsInnerPermissions;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
