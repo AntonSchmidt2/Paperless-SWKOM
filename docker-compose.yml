@@ -7,7 +7,8 @@ services:
   frontend:
     image: paperless:nginx # what does this do?
     build:
-      dockerfile: Frontend/Dockerfile_Frontend
+      dockerfile: Dockerfile_Frontend
+      context: ./Frontend
     ports:
       - "8080:80"
   backend:
