@@ -8,8 +8,6 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "documents_document")
 public class DocumentEntity {
     @Id
@@ -83,9 +81,10 @@ public class DocumentEntity {
     @OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DocumentNoteEntity> documentNoteEntities;
 
-    // https://stackoverflow.com/questions/56559136/mapstruct-problem-unknown-property-error-but-property-is-present
-    @OneToMany(mappedBy = "document")
-    private Set<DocumentTagsEntity> tags;
+    //@OneToMany(mappedBy = "document", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JoinColumn(name = "document_id")  // Add this line to specify the join column
+    //private Set<DocumentTagsEntity> tags;
+
 
     public Integer getId() {
         return id;
@@ -239,11 +238,11 @@ public class DocumentEntity {
         this.documentNoteEntities = documentNoteEntities;
     }
 
-    public Set<DocumentTagsEntity> getTags() {
-        return tags;
-    }
+    //public Set<DocumentTagsEntity> getTags() {
+    //    return tags;
+    //}
 
-    public void setTags(Set<DocumentTagsEntity> tags) {
-        this.tags = tags;
-    }
+    //public void setTags(Set<DocumentTagsEntity> tags) {
+        //this.tags = tags;
+    //}
 }

@@ -37,13 +37,13 @@ public abstract class DocumentMapper implements Mapper<DocumentEntity, DocumentD
     @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeDto")
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathDto")
     @Mapping(target = "archiveSerialNumber", source = "archiveSerialNumber", qualifiedByName = "archiveSerialNumberDto")
-    @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsDto")
+    // @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsDto")
     abstract public DocumentEntity dtoToEntity(DocumentDTO dto); // Abstract weil mapstruct alles generiert
 
     @Mapping(target = "correspondent", source = "correspondent", qualifiedByName = "correspondentEntity")
     @Mapping(target = "documentType", source = "documentType", qualifiedByName = "documentTypeEntity")
     @Mapping(target = "storagePath", source = "storagePath", qualifiedByName = "storagePathEntity")
-    @Mapping(target = "tags", source = "tags", qualifiedByName = "tagsEntity")
+    //@Mapping(target = "tags", source = "tags", qualifiedByName = "tagsEntity")
     abstract public DocumentDTO entityToDTO(DocumentEntity entity);
 
     @Named("correspondentEntity")

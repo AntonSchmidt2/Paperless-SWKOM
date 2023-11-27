@@ -10,6 +10,7 @@ import org.openapitools.persistence.entities.*;
 import org.openapitools.persistence.repositories.*;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.openapitools.serviceLayer.mapper.DocumentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
@@ -32,18 +33,9 @@ public class DocumentMapperTest {
     private DocumentTagsRepository documentTagsRepository;
 
     // @InjectMocks annotation creates an instance of the class and injects the mocks that are created with the @MockBean annotation
-    @InjectMocks
-    private final DocumentMapper documentMapper = new DocumentMapper() {
-        @Override
-        public DocumentEntity dtoToEntity(DocumentDTO dto) {
-            return null;
-        }
-
-        @Override
-        public DocumentDTO entityToDTO(DocumentEntity entity) {
-            return null;
-        }
-    };
+    // Use the generated implementation of DocumentMapper
+    @Autowired
+    private DocumentMapper documentMapper;
 
     // initializes mocks before each test method
     @BeforeEach

@@ -5,20 +5,21 @@
 version: "3"
 services:
   frontend:
-    image: paperless:nginx
+    image: paperless:nginx # what does this do?
     build:
       dockerfile: Frontend/Dockerfile_Frontend
     ports:
       - "8080:80"
   backend:
-    image: paperless:openjdk
+    image: paperless:openjdk # what does this do?
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_Backend
     ports:
       - "8088:8088"
   postgres:
     image: postgres:latest
-    restart: always
+    container_name: paperless-postgres
+    # restart: always
     ports:
       - "5432:5432"
     environment:

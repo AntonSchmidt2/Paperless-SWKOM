@@ -4,14 +4,17 @@ import org.openapitools.persistence.entities.DocumentEntity;
 import org.openapitools.persistence.repositories.DocumentRepository;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.openapitools.serviceLayer.mapper.DocumentMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
-
-
+@Service
 public class DocumentServiceImpl {
     private final DocumentRepository documentRepository;
     //NOTE for some reason Autowired didnt recognize the Mapper as a Component
     // this is a quick fix, might be better to get it to work later
+    @Autowired
     private final DocumentMapper documentMapper;
     private final RabbitMQSender rabbitMQSender;
 
