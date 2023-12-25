@@ -20,7 +20,7 @@ services:
   postgres:
     image: postgres:latest
     container_name: paperless-postgres
-    # restart: always
+    restart: always
     ports:
       - "5432:5432"
     environment:
@@ -28,7 +28,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=Paperless
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "postgres" ]
@@ -54,3 +54,5 @@ services:
       - MINIO_SECRET_KEY=paperless
       - MINIO_CONSOLE_ADDRESS=:9001
     command: server /data
+volumes:
+  postgres-data:

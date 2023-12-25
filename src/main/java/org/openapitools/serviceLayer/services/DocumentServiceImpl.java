@@ -37,7 +37,7 @@ public class DocumentServiceImpl {
         DocumentEntity documentToBeSaved = documentMapper.dtoToEntity(documentDTO);
 
         // Set dummy values for the fields that are not yet implemented
-        documentToBeSaved.setChecksum("checksum");
+        // documentToBeSaved.setChecksum("checksum");
         documentToBeSaved.setStorageType("pdf");
         documentToBeSaved.setMimeType("pdf");
 
