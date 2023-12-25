@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
-import org.openapitools.serviceLayer.dto.responseOK.GetDocument200Response;
-import org.openapitools.serviceLayer.dto.responseOK.GetDocuments200Response;
 import org.openapitools.serviceLayer.services.DocumentServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,7 +38,7 @@ public class ApiController implements Api {
 
     //take received document & metadata and send to service layer (documentService)
     @Override
-    public ResponseEntity<String> uploadDocument(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
+    public ResponseEntity<String> handleDocumentUploadRequest(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
         try {
 
             String name = document.get(0).getOriginalFilename();

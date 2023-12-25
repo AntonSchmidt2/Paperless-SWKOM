@@ -1776,4 +1776,6 @@ public interface Api {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //take received document & metadata and send to service layer (documentService)
+    ResponseEntity<String> handleDocumentUploadRequest(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document);
 }
