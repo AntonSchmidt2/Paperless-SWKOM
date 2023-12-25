@@ -49,6 +49,7 @@ public class ApiController implements Api {
             documentDTO.setDocumentType(JsonNullable.of(documentType));
             documentDTO.setTags(JsonNullable.of(tags));
             documentDTO.setCorrespondent(JsonNullable.of(correspondent));
+            documentDTO.setDocument(document.get(0));
 
             // call injected service layer method
             documentService.uploadDocument(documentDTO);
