@@ -35,6 +35,7 @@ public class DocumentServiceImpl {
 
     public DocumentServiceImpl(DocumentRepository documentRepository, MinioClient minioClient, DocumentMapper documentMapper, RabbitMQSender rabbitMQSender) {
         this.documentRepository = documentRepository;
+        //minIO client has to refer to docker address
         this.minioClient = MinioClient.builder()
                 .endpoint("http://host.docker.internal:9000")
                 .credentials("paperless", "paperless")
