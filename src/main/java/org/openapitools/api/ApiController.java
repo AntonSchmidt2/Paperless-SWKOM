@@ -1,6 +1,7 @@
 package org.openapitools.api;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 @CrossOrigin(origins = "http://localhost:8080") // Allow requests from localhost:8080
 public class ApiController implements Api {
+    private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
     private final NativeWebRequest request;
     private final DocumentServiceImpl documentService;
 
@@ -40,7 +42,7 @@ public class ApiController implements Api {
     @Override
     public ResponseEntity<String> handleDocumentUploadRequest(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
         try {
-
+            // create DTO from received data
             String name = document.get(0).getOriginalFilename();
             DocumentDTO documentDTO = new DocumentDTO();
             documentDTO.setTitle(JsonNullable.of(title == null ? name : title));

@@ -1765,7 +1765,7 @@ public interface Api {
         value = "/api/documents/post_document/",
         consumes = { "multipart/form-data" }
     )
-    default ResponseEntity<String> uploadDocument(
+    default ResponseEntity<String> handleDocumentUploadRequest(
         @Parameter(name = "title", description = "") @Valid @RequestParam(value = "title", required = false) String title,
         @Parameter(name = "created", description = "") @Valid @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime created,
         @Parameter(name = "document_type", description = "") @Valid @RequestParam(value = "document_type", required = false) Integer documentType,
@@ -1775,7 +1775,4 @@ public interface Api {
     ) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-    //take received document & metadata and send to service layer (documentService)
-    ResponseEntity<String> handleDocumentUploadRequest(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document);
 }
