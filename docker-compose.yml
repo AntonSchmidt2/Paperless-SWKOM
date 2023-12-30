@@ -36,7 +36,7 @@ services:
       timeout: 5s
       retries: 20
   rabbitmq:
-    image: "rabbitmq:3.8"
+    image: "rabbitmq:3.8-management"
     hostname: "rabbitmq"
     ports:
       - "5672:5672"  # RabbitMQ port

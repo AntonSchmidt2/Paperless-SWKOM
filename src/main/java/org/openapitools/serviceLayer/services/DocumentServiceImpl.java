@@ -85,6 +85,10 @@ public class DocumentServiceImpl {
             } catch (NoSuchAlgorithmException | InvalidKeyException e) {
                 logger.error("Error occurred", e);
             }
+
+            //Send message to RabbitMQ
+            rabbitMQSender.sendToOcrDocumentInQueue(documentDTO.getDocument().getOriginalFilename());
+            logger.info("Message sent to RabbitMQ");
         } catch (ErrorResponseException e) {
             throw new RuntimeException(e);
         } catch (InsufficientDataException e) {
