@@ -1,11 +1,5 @@
-/*
-Throws errors when trying to import into postgres -
-Problems with content_type_id column in line 571,578
-I just removed content_type_id but am not sure if it is vital for the integrity of the DB
-------------------
-Also the role 'paperless' needs to be created before import
-as all the tables are set to be owned by this role
-*/
+
+create DATABASE Paperless;
 
 create table auth_group
 (
@@ -355,9 +349,7 @@ create table documents_document
         constraint documents_document_correspondent_id_6164eb0c_fk_documents
             references documents_correspondent
             deferrable initially deferred,
-    checksum              varchar(32)              not null
-        constraint documents_document_checksum_75209391_uniq
-            unique,
+    checksum              varchar(36),
     added                 timestamp with time zone not null,
     storage_type          varchar(11)              not null,
     filename              varchar(1024)

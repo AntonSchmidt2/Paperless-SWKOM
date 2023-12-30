@@ -5,35 +5,38 @@
 version: "3"
 services:
   frontend:
-    image: paperless:nginx
+    image: paperless:nginx # what does this do?
     build:
-      dockerfile: Frontend/Dockerfile_Frontend
+      dockerfile: Dockerfile_Frontend
+      context: ./Frontend
     ports:
       - "8080:80"
   backend:
-    image: paperless:openjdk
+    image: paperless:openjdk # what does this do?
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_Backend
     ports:
       - "8088:8088"
   postgres:
     image: postgres:latest
+    container_name: paperless-postgres
     restart: always
     ports:
       - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB="Paperless"
+      - POSTGRES_DB=Paperless
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: [ "CMD", "pg_isready", "-U", "postgres" ]
       interval: 10s
       timeout: 5s
       retries: 20
   rabbitmq:
-    image: "rabbitmq:3.8"
+    image: "rabbitmq:3.8-management"
     hostname: "rabbitmq"
     ports:
       - "5672:5672"  # RabbitMQ port
@@ -51,3 +54,5 @@ services:
       - MINIO_SECRET_KEY=paperless
       - MINIO_CONSOLE_ADDRESS=:9001
     command: server /data
+volumes:
+  postgres-data:

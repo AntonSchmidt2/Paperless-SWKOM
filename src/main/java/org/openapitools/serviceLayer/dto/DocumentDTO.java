@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.Valid;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.annotation.Generated;
@@ -23,6 +24,16 @@ import javax.annotation.Generated;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2023-10-10T06:36:40.060738Z[Etc/UTC]")
 public class DocumentDTO {
+  private MultipartFile document;
+
+  // getters and setters for 'document'
+  public MultipartFile getDocument() {
+    return document;
+  }
+
+  public void setDocument(MultipartFile document) {
+    this.document = document;
+  }
 
   private Integer id;
 
