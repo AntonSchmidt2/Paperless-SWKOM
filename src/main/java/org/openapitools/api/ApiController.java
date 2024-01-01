@@ -3,6 +3,7 @@ package org.openapitools.api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -55,7 +56,12 @@ public class ApiController implements Api {
 
             // call injected service layer method
             documentService.uploadDocument(documentDTO);
-            return ResponseEntity.ok().body("Document upload finished");
+            documentService.uploadDocument(documentDTO);
+            
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"message\": \"Document upload finished\"}");
 
         } catch (Exception e) {
             e.printStackTrace();
