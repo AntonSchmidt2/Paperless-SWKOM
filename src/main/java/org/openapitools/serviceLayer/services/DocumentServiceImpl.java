@@ -3,15 +3,12 @@ package org.openapitools.serviceLayer.services;
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.errors.*;
-import org.openapitools.OpenApiGeneratorApplication;
 import org.openapitools.persistence.entities.DocumentEntity;
 import org.openapitools.persistence.repositories.DocumentRepository;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
 import org.openapitools.serviceLayer.mapper.DocumentMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
@@ -31,9 +28,10 @@ public class DocumentServiceImpl {
     private final DocumentMapper documentMapper;
     private final RabbitMQSender rabbitMQSender;
 
+
     private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
-    public DocumentServiceImpl(DocumentRepository documentRepository, MinioClient minioClient, DocumentMapper documentMapper, RabbitMQSender rabbitMQSender) {
+    public DocumentServiceImpl(DocumentRepository documentRepository, MinioClient minioClient, DocumentMapper documentMapper, RabbitMQSender rabbitMQSender, TesseractService_Deprecated ocrService) {
         this.documentRepository = documentRepository;
         //minIO client has to refer to docker address
         this.minioClient = MinioClient.builder()

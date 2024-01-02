@@ -1,5 +1,7 @@
 package org.openapitools.api;
 
+import org.openapitools.serviceLayer.services.OcrService;
+import org.openapitools.serviceLayer.services.TesseractService_Deprecated;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +29,14 @@ public class ApiController implements Api {
     private final NativeWebRequest request;
     private final DocumentServiceImpl documentService;
 
+    private final TesseractService_Deprecated ocrService;
+
     // Autowired constructor based dependency injection
     @Autowired
-    public ApiController(NativeWebRequest request, DocumentServiceImpl documentService) {
+    public ApiController(NativeWebRequest request, DocumentServiceImpl documentService, TesseractService_Deprecated ocrService, TesseractService_Deprecated ocrService1) {
         this.request = request;
         this.documentService = documentService;
+        this.ocrService = ocrService;
     }
 
     @Override
@@ -54,10 +59,13 @@ public class ApiController implements Api {
             documentDTO.setCorrespondent(JsonNullable.of(correspondent));
             documentDTO.setDocument(document.get(0));
 
+            String text = ocrService.extractTextFromMultipartFile(document.get(0));
+            System.out.println(text);
+
             // call injected service layer method
             documentService.uploadDocument(documentDTO);
             documentService.uploadDocument(documentDTO);
-            
+
             return ResponseEntity
                     .ok()
                     .contentType(MediaType.APPLICATION_JSON)
