@@ -31,7 +31,7 @@ public class DocumentServiceImpl {
 
     private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
 
-    public DocumentServiceImpl(DocumentRepository documentRepository, MinioClient minioClient, DocumentMapper documentMapper, RabbitMQSender rabbitMQSender, TesseractService_Deprecated ocrService) {
+    public DocumentServiceImpl(DocumentRepository documentRepository, MinioClient minioClient, DocumentMapper documentMapper, RabbitMQSender rabbitMQSender) {
         this.documentRepository = documentRepository;
         //minIO client has to refer to docker address
         this.minioClient = MinioClient.builder()

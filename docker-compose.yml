@@ -44,6 +44,13 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=paperless
       - RABBITMQ_DEFAULT_PASS=paperless
+  tesseract:
+    image: paperless:Tesseract
+    build:
+      dockerfile: Dockerfile_OCR
+      context: Tesseract
+    ports:
+      - "8090:8090"
   minio:
     image: minio/minio
     ports:
