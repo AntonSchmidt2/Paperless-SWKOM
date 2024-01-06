@@ -15,6 +15,7 @@ services:
     image: paperless:openjdk # what does this do?
     build:
       dockerfile: Dockerfile_Backend
+      context: ./spring-boot-service
     ports:
       - "8088:8088"
   postgres:
@@ -37,6 +38,7 @@ services:
       retries: 20
   rabbitmq:
     image: "rabbitmq:3.8-management"
+    container_name: paperless-rabbitmq
     hostname: "rabbitmq"
     ports:
       - "5672:5672"  # RabbitMQ port
@@ -49,18 +51,9 @@ services:
       interval: 10s
       timeout: 5s
       retries: 20
-  tesseract:
-    image: paperless:Tesseract
-    build:
-      dockerfile: Dockerfile_OCR
-      context: Tesseract
-    ports:
-      - "8090:8090"
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
   minio:
     image: minio/minio
+    container_name: paperless-minio
     ports:
       - "9000:9000" # MinIO port
       - "9001:9001" # MinIO console port

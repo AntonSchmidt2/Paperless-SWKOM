@@ -10,7 +10,7 @@ import tempfile
 
 # Establish connection to MinIO
 minio_client = Minio(
-    "localhost:9000",
+    "paperless-minio:9000",
     access_key="paperless",
     secret_key="paperless",
     secure=False
@@ -18,7 +18,7 @@ minio_client = Minio(
 
 # Establish connection to PostgreSQL
 conn = psycopg2.connect(
-    host="localhost",
+    host="paperless-postgres",
     port=5432,
     database="Paperless",
     user="postgres",
@@ -29,7 +29,7 @@ conn = psycopg2.connect(
 # Establish connection to RabbitMQ
 credentials = pika.PlainCredentials('paperless', 'paperless')
 connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost', credentials=credentials)
+    pika.ConnectionParameters(host='paperless-rabbitmq', credentials=credentials)
 )
 channel = connection.channel()
 
