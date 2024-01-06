@@ -1,4 +1,4 @@
-package org.openapitools.Services;
+package org.tesseract.Services;
 
 import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
@@ -7,11 +7,14 @@ import io.minio.errors.MinioException;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.tesseract.Entity.DocumentEntityOCR;
+import org.tesseract.Repositories.DocumentRepositoryOCR;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +22,9 @@ import java.io.InputStream;
 
 @Service
 public class OcrService {
+
+    @Autowired
+    private DocumentRepositoryOCR documentRepositoryOCR;
     private final ITesseract tesseract;
     private final RabbitTemplate rabbitTemplate;
     private final MinioClient minioClient;
@@ -39,20 +45,20 @@ public class OcrService {
 
     @RabbitListener(queues = "OCR_DOCUMENT_IN") // Replace with the actual queue name
     public void processMessage(String message) {
-        try {
-            InputStream file = getFileFromMinio(message);
-            String text = extractText((MultipartFile) file);
-            System.out.println("Extracted Text: " + text);
+        System.out.println(message);
 
-            // Send the extracted text back to RabbitMQ (publish to a new queue or the same queue)
-            //rabbitTemplate.convertAndSend("extractedText-queue", text);
+        // DOES NOT WORK
+        // getting the file from minio returns some file stream - how to get to File/MultipartFile??
+        //InputStream file = getFileFromMinio(message);
+        //String text = extractText(file);
+        //System.out.println("Extracted Text: " + text);
 
-        } catch (IOException | TesseractException e) {
-            e.printStackTrace();
-        } catch (MinioException e) {
-            throw new RuntimeException(e);
-        }
+        // currently only saving the file name into the content column for test purposes
+        // DOES NOT WORK
+        // spring cant seem to find documentRepository bean
+        saveMessageToDatabase(message);
     }
+
 
     private InputStream getFileFromMinio(String fileName) throws IOException, MinioException {
         try {
@@ -68,14 +74,10 @@ public class OcrService {
         }
     }
 
-    public String extractText(MultipartFile file) throws IOException, TesseractException {
-        File tempFile = convertToFile(file);
-
-        String text = tesseract.doOCR(tempFile);
-        tempFile.delete();
-
-        return text;
+    private String extractText(File file) throws TesseractException {
+        return tesseract.doOCR(file);
     }
+
     public static File convertToFile(MultipartFile multipartFile) throws IOException {
         File tempFile = File.createTempFile("temp", null);
         multipartFile.transferTo(tempFile);
@@ -90,6 +92,20 @@ public class OcrService {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
+        }
+    }
+
+    private void saveMessageToDatabase(String message) {
+        // Check if a document with the same title already exists
+        DocumentEntityOCR existingDocument = documentRepositoryOCR.findByTitle(message);
+
+        if (existingDocument != null) {
+            // If the document exists, update its content
+            existingDocument.setContent(message);
+            documentRepositoryOCR.save(existingDocument);
+            System.out.println("Content updated for document with title '" + message + "'");
+        } else {
+            System.out.println("No document with title '" + message + "' found");
         }
     }
 }
