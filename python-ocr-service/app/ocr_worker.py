@@ -1,12 +1,23 @@
 import pika
 import psycopg2
-from minio import Minio
-from pdf2image import convert_from_path
-import pytesseract
 import os
 import io
 import tempfile
+from minio import Minio
+from pdf2image import convert_from_path
+import pytesseract
+import time
 
+def wait_for_queue(channel, queue_name, retries=500, delay=5):
+    for _ in range(retries):
+        try:
+            channel.queue_declare(queue=queue_name, durable=True)
+            print(f"Queue '{queue_name}' is ready.")
+            return
+        except pika.exceptions.AMQPError as e:
+            print(f"Queue declaration failed, retrying... Error: {e}")
+            time.sleep(delay)
+    raise Exception(f"Cannot declare queue '{queue_name}' after multiple attempts")
 
 # Establish connection to MinIO
 minio_client = Minio(
@@ -26,15 +37,14 @@ conn = psycopg2.connect(
 )
 
 # Establish connection to RabbitMQ
-# Establish connection to RabbitMQ
 credentials = pika.PlainCredentials('paperless', 'paperless')
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='paperless-rabbitmq', credentials=credentials)
 )
 channel = connection.channel()
 
-# Declare the queue
-channel.queue_declare(queue='document_queue')
+# Ensure the queue exists
+wait_for_queue(channel, 'OCR_DOCUMENT_IN')
 
 # callback for basic_consume
 def callback(ch, method, properties, body):
