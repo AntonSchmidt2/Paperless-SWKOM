@@ -87,23 +87,8 @@ public class DocumentServiceImpl {
             //Send message to RabbitMQ
             rabbitMQSender.sendToOcrDocumentInQueue(documentDTO.getDocument().getOriginalFilename());
             logger.info("Message sent to RabbitMQ");
-        } catch (ErrorResponseException e) {
-            throw new RuntimeException(e);
-        } catch (InsufficientDataException e) {
-            throw new RuntimeException(e);
-        } catch (InternalException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidKeyException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidResponseException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        } catch (ServerException e) {
-            throw new RuntimeException(e);
-        } catch (XmlParserException e) {
+        } catch (Exception e) {
+            logger.error("Error occurred", e);
             throw new RuntimeException(e);
         }
     }
