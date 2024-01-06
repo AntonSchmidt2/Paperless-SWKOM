@@ -1,23 +1,73 @@
+## as of now there are issues with composing the backend and frontend applications
+## without the existing image parameter
+## This is probably the cause of some functionality issues in the Paperless UI
+
 version: "3"
 services:
   frontend:
-    image: paperless:nginx
+    image: paperless:nginx # what does this do?
     build:
-      dockerfile: Frontend/Dockerfile
+      dockerfile: Dockerfile_Frontend
+      context: ./Frontend
     ports:
       - "8080:80"
   backend:
-    image: paperless:openjdk
+    image: paperless:openjdk # what does this do?
     build:
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_Backend
     ports:
       - "8088:8088"
+  postgres:
+    image: postgres:latest
+    container_name: paperless-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=Paperless
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
   rabbitmq:
-    image: "rabbitmq:3.8"
+    image: "rabbitmq:3.8-management"
     hostname: "rabbitmq"
     ports:
-      - "5672:5672"  # RabbitMQ default port
+      - "5672:5672"  # RabbitMQ port
       - "15672:15672"  # RabbitMQ Management Plugin port
     environment:
-      RABBITMQ_ERLANG_COOKIE: 61de55712c51b72384b7b6a3d8e81e875de757b705f513f5a39ddf9ca97b6516
-
+      - RABBITMQ_DEFAULT_USER=paperless
+      - RABBITMQ_DEFAULT_PASS=paperless
+    healthcheck:
+      test: [ "CMD", "rabbitmqctl", "await_startup" ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+  tesseract:
+    image: paperless:Tesseract
+    build:
+      dockerfile: Dockerfile_OCR
+      context: Tesseract
+    ports:
+      - "8090:8090"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000" # MinIO port
+      - "9001:9001" # MinIO console port
+    environment:
+      - MINIO_ACCESS_KEY=paperless
+      - MINIO_SECRET_KEY=paperless
+      - MINIO_CONSOLE_ADDRESS=:9001
+    command: server /data
+volumes:
+  postgres-data:

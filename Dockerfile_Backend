@@ -1,0 +1,18 @@
+FROM amazoncorretto:17-alpine-jdk
+# Install Ghostscript for tesseract
+WORKDIR /app
+# Install Maven (if not already installed)
+RUN apk --no-cache add maven
+# copy sourcecode
+COPY . /app
+# Build the application --> skit tests for now
+RUN mvn package -DskipTests
+
+# Install Ghostscript and Tesseract
+RUN apk --no-cache add ghostscript tesseract-ocr
+
+# Set the TESSDATA_PREFIX environment variable
+ENV TESSDATA_PREFIX /app/tessdata/
+
+EXPOSE 8088
+ENTRYPOINT ["java","-jar","target/openapi-spring-1.0.jar"]

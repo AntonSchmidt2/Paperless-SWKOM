@@ -8,7 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
-import com.paperless.services.dto.okresponse.GetCorrespondents200ResponseResultsInnerPermissions;
+import org.openapitools.serviceLayer.dto.responseOK.GetCorrespondents200ResponseResultsInnerPermissions;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 

@@ -8,8 +8,8 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
-import com.paperless.services.dto.DocumentNoteDTO;
-import com.paperless.services.dto.Permissions;
+import org.openapitools.serviceLayer.dto.DocumentNoteDTO;
+import org.openapitools.serviceLayer.dto.Permissions;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
