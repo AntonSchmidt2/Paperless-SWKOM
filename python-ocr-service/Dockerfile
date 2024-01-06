@@ -26,4 +26,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 ENV NAME ocr_worker
 
 # Run ocr_worker.py when the container launches
-CMD ["python", "./app/ocr_worker.py"]
+CMD ["python", "-u", "./app/ocr_worker.py"]

@@ -11,7 +11,7 @@ import time
 def wait_for_queue(channel, queue_name, retries=500, delay=5):
     for _ in range(retries):
         try:
-            channel.queue_declare(queue=queue_name, durable=True)
+            channel.queue_declare(queue=queue_name)
             print(f"Queue '{queue_name}' is ready.")
             return
         except pika.exceptions.AMQPError as e:
@@ -39,7 +39,7 @@ conn = psycopg2.connect(
 # Establish connection to RabbitMQ
 credentials = pika.PlainCredentials('paperless', 'paperless')
 connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='paperless-rabbitmq', credentials=credentials)
+    pika.ConnectionParameters(host='rabbitmq', credentials=credentials)
 )
 channel = connection.channel()
 
@@ -65,6 +65,7 @@ def callback(ch, method, properties, body):
             # Perform OCR
             extracted_texts = [pytesseract.image_to_string(image) for image in images]
             content = " ".join(extracted_texts)
+            print(content)
 
             # Write content to Postgres
             with conn.cursor() as cur:
