@@ -12,6 +12,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +21,8 @@ import java.io.InputStream;
 
 @Service
 public class OcrService {
+    private static final Logger logger = LoggerFactory.getLogger(OcrService.class);
+
     private final ITesseract tesseract;
     private final RabbitTemplate rabbitTemplate;
     private final MinioClient minioClient;
@@ -40,22 +44,25 @@ public class OcrService {
     @RabbitListener(queues = "OCR_DOCUMENT_IN") // Replace with the actual queue name
     public void processMessage(String message) {
         try {
+            logger.info("Processing message: " + message);
             InputStream file = getFileFromMinio(message);
             String text = extractText((MultipartFile) file);
-            System.out.println("Extracted Text: " + text);
+            logger.info("Extracted Text: " + text);
 
             // Send the extracted text back to RabbitMQ (publish to a new queue or the same queue)
             //rabbitTemplate.convertAndSend("extractedText-queue", text);
 
         } catch (IOException | TesseractException e) {
-            e.printStackTrace();
+            logger.error("Error processing message: " + message, e);
         } catch (MinioException e) {
+            logger.error("Error fetching file from Minio: " + message, e);
             throw new RuntimeException(e);
         }
     }
 
     private InputStream getFileFromMinio(String fileName) throws IOException, MinioException {
         try {
+            logger.info("Fetching file from Minio: " + fileName);
             GetObjectResponse object = minioClient.getObject(
                     GetObjectArgs.builder()
                             .bucket("paperless-bucket")
@@ -64,11 +71,13 @@ public class OcrService {
             );
             return object;
         } catch (Exception e) {
+            logger.error("Error fetching file from Minio: " + fileName, e);
             throw new IOException("Error fetching file from Minio", e);
         }
     }
 
     public String extractText(MultipartFile file) throws IOException, TesseractException {
+        logger.info("Extracting text from file");
         File tempFile = convertToFile(file);
 
         String text = tesseract.doOCR(tempFile);
@@ -77,12 +86,14 @@ public class OcrService {
         return text;
     }
     public static File convertToFile(MultipartFile multipartFile) throws IOException {
+        logger.info("Converting multipart file to File");
         File tempFile = File.createTempFile("temp", null);
         multipartFile.transferTo(tempFile);
         return tempFile;
     }
 
     private void waitForQueueCreation(String queueName) {
+        logger.info("Waiting for queue creation: " + queueName);
         // Add a loop to wait for the queue to be declared
         while (amqpAdmin.getQueueProperties(queueName) == null) {
             try {
