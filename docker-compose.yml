@@ -69,5 +69,14 @@ services:
       - MINIO_SECRET_KEY=paperless
       - MINIO_CONSOLE_ADDRESS=:9001
     command: server /data
+  ocr-worker:
+    build:
+      context: ./python-ocr-service
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq
+      - postgres
+      - minio
+
 volumes:
   postgres-data:
