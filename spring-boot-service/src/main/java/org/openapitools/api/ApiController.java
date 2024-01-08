@@ -59,7 +59,6 @@ public class ApiController implements Api {
 
             // call injected service layer method
             documentService.uploadDocument(documentDTO);
-            documentService.uploadDocument(documentDTO);
 
             return ResponseEntity
                     .ok()
