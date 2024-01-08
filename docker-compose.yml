@@ -70,6 +70,7 @@ services:
       - rabbitmq
       - postgres
       - minio
+    command: ["sh", "-c", "sleep 15; <original-ocr-worker-command>"]
 
 volumes:
   postgres-data:
