@@ -2,7 +2,6 @@ package org.openapitools;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.openapitools.jackson.nullable.JsonNullable;
@@ -20,6 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class DocumentMapperTest {
+
+    // DocumentMapper class is abstract, can therefore not be mocked and has to be injected
+    @Autowired
+    private DocumentMapper documentMapper;
+
     // @MockBean annotation creates a mock implementation for the class
     @MockBean
     private CorrespondentRepository correspondentRepository;
@@ -32,10 +36,6 @@ public class DocumentMapperTest {
     @MockBean
     private DocumentTagsRepository documentTagsRepository;
 
-    // @InjectMocks annotation creates an instance of the class and injects the mocks that are created with the @MockBean annotation
-    // Use the generated implementation of DocumentMapper
-    @Autowired
-    private DocumentMapper documentMapper;
 
     // initializes mocks before each test method
     @BeforeEach
@@ -53,6 +53,7 @@ public class DocumentMapperTest {
         documentDTO.setDocumentType(JsonNullable.of(2));
         documentDTO.setStoragePath(JsonNullable.of(3));
         documentDTO.setTags(JsonNullable.of(Collections.singletonList(4)));
+
 
         // Create dummy entities
         CorrespondentEntity correspondent = new CorrespondentEntity();
@@ -81,6 +82,4 @@ public class DocumentMapperTest {
         assertEquals(documentType, document.getDocumentType());
         assertEquals(storagePath, document.getStoragePath());
     }
-
-
 }
