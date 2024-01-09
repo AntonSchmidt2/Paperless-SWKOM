@@ -1,13 +1,13 @@
 package org.openapitools.api;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.openapitools.serviceLayer.dto.DocumentDTO;
-import org.openapitools.serviceLayer.dto.responseOK.GetDocument200Response;
-import org.openapitools.serviceLayer.dto.responseOK.GetDocuments200Response;
 import org.openapitools.serviceLayer.services.DocumentServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +23,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 @CrossOrigin(origins = "http://localhost:8080") // Allow requests from localhost:8080
 public class ApiController implements Api {
+    private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
     private final NativeWebRequest request;
     private final DocumentServiceImpl documentService;
 
@@ -40,9 +41,9 @@ public class ApiController implements Api {
 
     //take received document & metadata and send to service layer (documentService)
     @Override
-    public ResponseEntity<String> uploadDocument(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
+    public ResponseEntity<String> handleDocumentUploadRequest(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
         try {
-
+            // create DTO from received data
             String name = document.get(0).getOriginalFilename();
             DocumentDTO documentDTO = new DocumentDTO();
             documentDTO.setTitle(JsonNullable.of(title == null ? name : title));
@@ -51,10 +52,18 @@ public class ApiController implements Api {
             documentDTO.setDocumentType(JsonNullable.of(documentType));
             documentDTO.setTags(JsonNullable.of(tags));
             documentDTO.setCorrespondent(JsonNullable.of(correspondent));
+            documentDTO.setDocument(document.get(0));
+
+            //String text = ocrService.extractTextFromMultipartFile(document.get(0));
+            //System.out.println(text);
 
             // call injected service layer method
             documentService.uploadDocument(documentDTO);
-            return ResponseEntity.ok().body("Document upload finished");
+
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"message\": \"Document upload finished\"}");
 
         } catch (Exception e) {
             e.printStackTrace();

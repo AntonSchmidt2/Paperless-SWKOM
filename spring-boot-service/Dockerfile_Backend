@@ -1,4 +1,5 @@
 FROM amazoncorretto:17-alpine-jdk
+# Install Ghostscript for tesseract
 WORKDIR /app
 # Install Maven (if not already installed)
 RUN apk --no-cache add maven

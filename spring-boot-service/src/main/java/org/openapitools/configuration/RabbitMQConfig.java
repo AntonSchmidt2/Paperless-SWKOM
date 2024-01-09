@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.PostConstruct;
+
 @Configuration
 public class RabbitMQConfig {
 
@@ -24,19 +26,8 @@ public class RabbitMQConfig {
     // default exchange routing mechanism
     public static final String EXCHANGE = "";
 
-    public static final String OCR_DOCUMENT_IN_QUEUE_NAME = "ORC_DOCUMENT_IN";
-    public static final String OCR_DOCUMENT_OUT_QUEUE_NAME = "ORC_DOCUMENT_OUT";
-
-    // this is the queue that the OCR service will listen to
-    //durable false means that the queue will not survive a broker restart
-    @Bean
-    public Queue ocrDocumentInQueue() {
-        return new Queue(OCR_DOCUMENT_IN_QUEUE_NAME, false);
-    }
-
-    @Bean
-    public Queue ocrDocumentOutQueue() { return new Queue(OCR_DOCUMENT_OUT_QUEUE_NAME, false); }
-
+    public static final String OCR_DOCUMENT_IN_QUEUE_NAME = "OCR_DOCUMENT_IN";
+    public static final String OCR_DOCUMENT_OUT_QUEUE_NAME = "OCR_DOCUMENT_OUT";
 
     // Set up connection to RabbitMQ
     @Bean
@@ -45,6 +36,18 @@ public class RabbitMQConfig {
         connectionFactory.setUsername(username);
         connectionFactory.setPassword(password);
         return connectionFactory;
+    }
+
+    // This is the queue that the OCR service will listen to
+    // Durable false means that the queue will not survive a broker restart
+    @Bean
+    public Queue ocrDocumentInQueue() {
+        return new Queue(OCR_DOCUMENT_IN_QUEUE_NAME, false);
+    }
+
+    @Bean
+    public Queue ocrDocumentOutQueue() {
+        return new Queue(OCR_DOCUMENT_OUT_QUEUE_NAME, false);
     }
 
     // RabbitTemplate is a class that provides support for RabbitMQ sending and receiving.
