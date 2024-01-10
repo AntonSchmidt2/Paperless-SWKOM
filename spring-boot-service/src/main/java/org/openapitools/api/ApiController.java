@@ -23,7 +23,7 @@ import org.openapitools.jackson.nullable.JsonNullable;
 @RequestMapping("${openapi.paperlessRestServer.base-path:}")
 @CrossOrigin(origins = "http://localhost:8080") // Allow requests from localhost:8080
 public class ApiController implements Api {
-    private static final Logger logger = LoggerFactory.getLogger(DocumentServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(ApiController.class);
     private final NativeWebRequest request;
     private final DocumentServiceImpl documentService;
 
@@ -43,6 +43,8 @@ public class ApiController implements Api {
     @Override
     public ResponseEntity<String> handleDocumentUploadRequest(String title, OffsetDateTime created, Integer documentType, List<Integer> tags, Integer correspondent, List<MultipartFile> document) {
         try {
+            logger.info("document upload request landed in API controller");
+
             // create DTO from received data
             String name = document.get(0).getOriginalFilename();
             DocumentDTO documentDTO = new DocumentDTO();
@@ -66,6 +68,7 @@ public class ApiController implements Api {
                     .body("{\"message\": \"Document upload finished\"}");
 
         } catch (Exception e) {
+            logger.error("Error occurred while handling document upload request in APIController", e);
             e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
